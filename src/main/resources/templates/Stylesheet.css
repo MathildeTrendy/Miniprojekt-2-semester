@@ -50,3 +50,8 @@ body {
         float: none;
     }
 }
+/*Logo responsive in header*/
+.responsive {
+    width: 100%;
+    height: auto;
+}
