@@ -1,4 +1,4 @@
-package com.example.demo11.Model;
+package com.example.MiniProject.Model;
 
 public class Items {
     private String name;

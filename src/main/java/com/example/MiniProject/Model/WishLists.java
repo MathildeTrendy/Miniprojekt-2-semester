@@ -1,4 +1,4 @@
-package com.example.demo11.Model;
+package com.example.MiniProject.Model;
 
 public class WishLists {
     private String name;
