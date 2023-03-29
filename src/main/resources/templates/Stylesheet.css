@@ -5,7 +5,6 @@ body {
 }
 
 .header {
-    float: left;
     background-color: white;
     text-align: center;
     padding: 12px;
@@ -17,7 +16,7 @@ body {
 
 /*Logo responsive in header*/
 .logoresponsive {
-    width: 100px;
+    width: 400px;
     height: auto;
     border: none;
 }
