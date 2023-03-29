@@ -21,14 +21,13 @@
 
 <div class="SignUpForm">
     <form action ="#" th:action="@{/signup}" th:object="${user}" method="post">
-        <p>First name <input type ="text" th:field="*{firstName}"></p>
-        <p>Last name <input type ="text" th:field="*{lastName}"></p>
-        <p>E-mail <input type ="text" th:field="*{email}"></p>
-        <p>Password <input type ="text" th:field="*{password}"></p>
-
+        <p>First name* <input type ="text" th:field="*{firstName}"></p>
+        <p>Last name* <input type ="text" th:field="*{lastName}"></p>
+        <p>E-mail* <input type ="text" th:field="*{email}"></p>
+        <p>Password* <input type ="text" th:field="*{password}"></p>
+        <p>* required fields</p>
+        <p><input type="submit" value="Sign Up"></p>
     </form>
-
-
 </div>
 
 

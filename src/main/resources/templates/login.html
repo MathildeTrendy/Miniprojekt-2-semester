@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>WishListFreak</title>
@@ -14,6 +14,14 @@
     </div>
 </div>
 <body>
+<div class="SignInForm">
+    <form action ="#" th:action="@{/signup}" th:object="${user}" method="post">
 
+        <p>E-mail* <input type ="text" th:field="*{email}"></p>
+        <p>Password* <input type ="text" th:field="*{password}"></p>
+        <p> * required fields</p>
+        <p><input type="submit" value="Sign In" />
+    </form>
+</div>
 </body>
 </html>
