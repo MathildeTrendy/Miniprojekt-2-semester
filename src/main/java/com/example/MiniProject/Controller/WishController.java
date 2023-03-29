@@ -31,6 +31,13 @@ public class WishController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/login")
+    public String loginform(Model model){
+        model.addAttribute("user", "userLogin");
+        return "login";
+    }
+
 }
 
 
