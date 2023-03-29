@@ -1,7 +1,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     height: 1200px;
-    background: linear-gradient(to bottom, #ffffff 20%, #ffccff 100%);
+    background: linear-gradient(to bottom, #ffffff 20%, #cac6f7 100%);
 }
 
 .header {
@@ -23,7 +23,7 @@ body {
 :root {
     /* color type A */
     --line_color: #555555;
-    --back_color: #FFECF6;
+    --back_color: #c3c4e3;
 }
 .button{
     position : relative ;
