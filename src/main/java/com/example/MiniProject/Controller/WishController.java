@@ -1,18 +1,30 @@
 package com.example.MiniProject.Controller;
 
-import com.example.MiniProject.Repository.WishRepository;
-import org.springframework.stereotype.Controller;
+import Service.ServiceWish;
+import com.example.MiniProject.Model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping
+@RestController
+@RequestMapping("/wishFreaks")
 public class WishController {
 
-    WishRepository wishRepository;
+    private ServiceWish serviceWish;
 
-    public WishController(WishRepository wishRepository) {
-        this.wishRepository = wishRepository;
+    @PostMapping("/signup")
+    public ResponseEntity<String> createUser(@RequestBody User user) {
+        try {
+            serviceWish.createUser(user);
+            return ResponseEntity.ok("Account created");
+        } catch (ServiceWish.InvalidInputException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
-
-
 }
+
+
+
