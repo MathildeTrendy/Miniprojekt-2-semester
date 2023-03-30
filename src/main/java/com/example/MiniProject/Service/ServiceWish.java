@@ -16,7 +16,6 @@ public class ServiceWish {
         this.model = model;
     }
 
-
     public void createUser(User user) throws InvalidInputException {
         if (user.getFirstName() == null || user.getFirstName().isEmpty() ||
                 user.getLastName() == null || user.getLastName().isEmpty() ||
