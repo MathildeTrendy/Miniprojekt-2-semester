@@ -35,7 +35,7 @@ public class WishController {
             return "redirect:/wishList";
         } else {
             model.addAttribute("LoginFailed", "");
-            return "Log In";
+            return "login";
         }
     }
 
