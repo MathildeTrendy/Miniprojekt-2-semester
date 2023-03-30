@@ -1,4 +1,4 @@
-package Service;
+package com.example.MiniProject.Service;
 
 import ch.qos.logback.core.model.Model;
 import com.example.MiniProject.Model.User;
