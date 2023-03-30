@@ -1,15 +1,21 @@
 package Service;
 
+import ch.qos.logback.core.model.Model;
 import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Repository.WishRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ServiceWish {
 
-    @Autowired
     private WishRepository wishRepository;
+    private Model model;
+
+    public ServiceWish(WishRepository wishRepository, Model model) {
+        this.wishRepository = wishRepository;
+        this.model = model;
+    }
+
 
     public void createUser(User user) throws InvalidInputException {
         if (user.getFirstName() == null || user.getFirstName().isEmpty() ||
@@ -21,12 +27,26 @@ public class ServiceWish {
 
         wishRepository.createUser(user);
     }
+    //Metode der verificere en bruger/konto
+    public boolean verifyAccount(String email, String password) {
+            User user = wishRepository.getUserByEmail(email);
+            if (user != null && user.getPassword().equals(password)) {
+                return true;
+            } else {
+                return false;
+            }
+
+    }
 
     public class InvalidInputException extends Exception {
         public InvalidInputException(String errorMessage) {
             super(errorMessage);
         }
     }
+
+
+
+
 }
 
 
