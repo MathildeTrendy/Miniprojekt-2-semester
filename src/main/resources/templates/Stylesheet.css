@@ -1,6 +1,6 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    height: 1200px;
+    height: 800px;
     background: linear-gradient(to bottom, #ffffff 20%, #cac6f7 100%);
 }
 
@@ -265,6 +265,11 @@ body {
 
 .signuptext-center{
     width: 100%;
-    height: 200px;
+    height: 80px;
     text-align: center;
+}
+.SignUpForm{
+    width: 130px;
+    height: 120px;
+    align-content: center;
 }
