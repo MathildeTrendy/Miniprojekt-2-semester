@@ -269,7 +269,8 @@ body {
     text-align: center;
 }
 .SignUpForm{
-    width: 130px;
-    height: 120px;
+    align-self: center;
+    width: 300px;
+    height: 250px;
     align-content: center;
 }

@@ -15,6 +15,18 @@
 </div>
 
 <body>
+<div class ="signupsucces-center">
+  <h1> You have succesfully signed up!</h1>
+  <h1>Please login to begin creating your wish-lists</h1>
+</div>
+<div class="SignInForm">
+  <form action ="#" th:action="@{/login}" th:object="${user}" method="post">
 
+    <p>E-mail* <input type ="text" th:field="*{email}"></p>
+    <p>Password* <input type ="text" th:field="*{password}"></p>
+    <p> * required fields</p>
+    <p><input type="submit" value="Sign In" />
+  </form>
+</div>
 </body>
 </html>

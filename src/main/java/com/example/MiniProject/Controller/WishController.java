@@ -1,7 +1,6 @@
 package com.example.MiniProject.Controller;
 
 import Service.ServiceWish;
-
 import com.example.MiniProject.Model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -39,8 +38,6 @@ public class WishController {
             return "Log In";
         }
     }
-
-
 
 
 }
