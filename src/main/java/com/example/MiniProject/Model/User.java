@@ -1,6 +1,7 @@
 package com.example.MiniProject.Model;
 
 public class User {
+    private long id;
     private String firstName;
     private String lastName;
     private String email;
@@ -13,6 +14,10 @@ public class User {
         this.password = password;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -23,6 +28,10 @@ public class User {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setLastName(String lastName) {
