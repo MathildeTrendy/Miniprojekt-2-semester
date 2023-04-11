@@ -47,4 +47,7 @@ package com.example.MiniProject.Model;
     public void setPassword(String password) {
         this.password = password;
     }
-}
+
+        public void setId(long id) {
+        }
+    }
