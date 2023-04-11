@@ -1,11 +1,13 @@
 package com.example.MiniProject.Model;
 
-public class User {
+    //Field of attributes
+    public class User {
     private String firstName;
     private String lastName;
     private String email;
     private String password;
 
+    //Constructor
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -13,6 +15,7 @@ public class User {
         this.password = password;
     }
 
+    //Getter and setter
     public String getFirstName() {
         return firstName;
     }

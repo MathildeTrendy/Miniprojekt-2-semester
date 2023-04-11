@@ -1,19 +1,19 @@
 package com.example.MiniProject.Service;
 
-import ch.qos.logback.core.model.Model;
 import com.example.MiniProject.Model.User;
+import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Repository.WishRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class ServiceWish {
 
     private WishRepository wishRepository;
-    private Model model;
 
-    public ServiceWish(WishRepository wishRepository, Model model) {
+    public ServiceWish(WishRepository wishRepository) {
         this.wishRepository = wishRepository;
-        this.model = model;
     }
 
     public void createUser(User user) throws InvalidInputException {
@@ -26,15 +26,14 @@ public class ServiceWish {
 
         wishRepository.createUser(user);
     }
-    //Metode der verificere en bruger/konto
-    public boolean verifyAccount(String email, String password) {
-            User user = wishRepository.getUserByEmail(email);
-            if (user != null && user.getPassword().equals(password)) {
-                return true;
-            } else {
-                return false;
-            }
 
+    public boolean verifyAccount(String email, String password) {
+        User user = wishRepository.getUserByEmail(email);
+        if (user != null && user.getPassword().equals(password)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public class InvalidInputException extends Exception {
@@ -43,10 +42,18 @@ public class ServiceWish {
         }
     }
 
+    public void createWishList(String name) {
+        // Opret et ny ønskeliste baseret på navn ved hjælp af WishRepository
+        WishLists wishLists = new WishLists(name);
+        wishLists.setName(name);
+        wishRepository.createWishList(name);
+    }
 
 
 
 }
+
+
 
 
 

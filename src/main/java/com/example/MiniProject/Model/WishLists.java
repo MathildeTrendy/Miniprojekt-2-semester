@@ -1,15 +1,17 @@
 package com.example.MiniProject.Model;
 
-public class WishLists {
+
+    public class WishLists {
+
+    //Field of attributes
     private String name;
-    private String URL;
 
-
-    public WishLists(String name, String URL) {
+    //Constructor
+    public WishLists(String name) {
         this.name = name;
-        this.URL = URL;
     }
 
+    //Setter and getter
     public String getName() {
         return name;
     }
@@ -18,11 +20,6 @@ public class WishLists {
         this.name = name;
     }
 
-    public String getURL() {
-        return URL;
-    }
 
-    public void setURL(String URL) {
-        this.URL = URL;
-    }
+
 }

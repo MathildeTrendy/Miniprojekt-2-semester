@@ -1,12 +1,14 @@
 package com.example.MiniProject.Model;
 
-public class Items {
+    //Field of attributes
+    public class Items {
     private String name;
     private int quantity;
     private String description;
     private double price;
     private String URL;
 
+    //Constructor
     public Items(String name, int quantity, String description, double price, String URL) {
         this.name = name;
         this.quantity = quantity;
@@ -15,6 +17,7 @@ public class Items {
         this.URL = URL;
     }
 
+    //Getter and setter
     public String getName() {
         return name;
     }
