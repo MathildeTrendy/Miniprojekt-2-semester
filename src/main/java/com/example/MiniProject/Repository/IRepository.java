@@ -1,5 +1,5 @@
 package com.example.MiniProject.Repository;
-import Utility.LoginSampleException;
+import com.example.MiniProject.Utility.LoginSampleException;
 import com.example.MiniProject.Model.User;
 
 public interface IRepository {

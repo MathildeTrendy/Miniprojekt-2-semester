@@ -1,4 +1,4 @@
-package Utility;
+package com.example.MiniProject.Utility;
 
 public class LoginSampleException extends Throwable {
 

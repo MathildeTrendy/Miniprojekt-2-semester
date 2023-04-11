@@ -1,4 +1,4 @@
-package com.example.MiniProject.Controller;
+package com.example.MiniProject;
 
 import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Repository.WishRepository;

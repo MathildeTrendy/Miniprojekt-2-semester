@@ -1,6 +1,6 @@
 package com.example.MiniProject.Repository;
-import Utility.ManagerDb;
-import Utility.LoginSampleException;
+import com.example.MiniProject.Utility.ManagerDb;
+import com.example.MiniProject.Utility.LoginSampleException;
 import com.example.MiniProject.Model.User;
 import org.springframework.stereotype.Repository;
 import java.sql.Connection;

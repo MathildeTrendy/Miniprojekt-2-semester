@@ -1,4 +1,4 @@
-package Utility;
+package com.example.MiniProject.Utility;
 
 import java.io.FileInputStream;
 import java.io.IOException;
