@@ -274,3 +274,10 @@ body {
     height: 250px;
     align-content: center;
 }
+
+.errorsmiley{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
