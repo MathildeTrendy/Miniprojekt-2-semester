@@ -1,6 +1,5 @@
 package com.example.MiniProject.Model;
 
-
     public class WishLists {
 
     //Field of attributes

@@ -4,24 +4,23 @@ import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Repository.WishRepository;
 import com.example.MiniProject.Service.ServiceWish;
 import com.example.MiniProject.Model.User;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 @Controller
 @RequestMapping("")
 public class WishController {
 
     //Håndtere dataadgang.
     private ServiceWish serviceWish;
-    private Model model;
-    private WishRepository wishRepository;
-    private WishLists wishLists;
 
-    public WishController(ServiceWish serviceWish, Model model) {
+
+    public WishController(ServiceWish serviceWish) {
         this.serviceWish = serviceWish;
-        this.model = model;
     }
 
     @PostMapping("/signup")
@@ -31,6 +30,8 @@ public class WishController {
             return ResponseEntity.ok("Account created");
         } catch (ServiceWish.InvalidInputException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -47,6 +48,7 @@ public class WishController {
     @RequestMapping(value = "/createWishList", method = RequestMethod.POST)
     public String createWishList(@RequestParam String name, Model model){
         //Creates the desired object based on input from the form
+        WishLists wishLists = new WishLists(name);
         wishLists.setWishlistName(name);
 
         //Store/save the wish list in the database
@@ -58,6 +60,8 @@ public class WishController {
         //Redirect the user back to the wish list page/confirmation page
         return "redirect:/wishList";
 
+        //laver dem nede i metoden og over
+        //alt i toppen er en deler
     }
 
    @PostMapping("/edit")

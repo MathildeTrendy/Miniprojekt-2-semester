@@ -5,6 +5,9 @@ import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Repository.WishRepository;
 import org.springframework.stereotype.Service;
 
+
+import java.sql.SQLException;
+
 @Service
 public class ServiceWish {
 
@@ -14,7 +17,7 @@ public class ServiceWish {
         this.wishRepository = wishRepository;
     }
 
-    public void createUser(User user) throws InvalidInputException {
+    public void createUser(User user) throws InvalidInputException, SQLException {
         if (user.getFirstName() == null || user.getFirstName().isEmpty() ||
                 user.getLastName() == null || user.getLastName().isEmpty() ||
                 user.getEmail() == null || user.getEmail().isEmpty() ||
@@ -26,7 +29,7 @@ public class ServiceWish {
     }
 
     public boolean verifyAccount(String email, String password) {
-        User user = wishRepository.getUserByEmail(email);
+        User user = wishRepository.verifyByEmail(email);
         if (user != null && user.getPassword().equals(password)) {
             return true;
         } else {

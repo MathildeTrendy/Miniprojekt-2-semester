@@ -3,83 +3,78 @@ package com.example.MiniProject.Repository;
 import com.example.MiniProject.Model.Items;
 import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Model.WishLists;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 public class WishRepository {
 
-    // JDBC-connection-object - database handling
-    private JdbcTemplate jdbcTemplate;
 
-    // Constructor which inject the JdbcTemplate
-    public WishRepository(JdbcTemplate jdbcTemplate) throws SQLException {
-        this.jdbcTemplate = jdbcTemplate;
+    public void createUser(User user) throws SQLException {
+        //Creates a database connection in Java by specifying the URL, username, and password.
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:6060/miniProjekt", "root", "SabrinaMathilde")) {
+
+            //SQL query used to insert specified data into the database.
+            String SQL = "INSERT INTO user(first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(SQL);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
-    //Establishing a connection to the database using the JDBC API.
-    String url = "jdbc:mysql://localhost:6060/miniProjekt"; // URL to the database
-    String user = "root"; // Username for the database
-    String password = "SabrinaMathilde"; // Password to the database
+    // Method to verify a user by their email adress
+    public User verifyByEmail(String email) {
 
-    //Creates a database connection in Java by specifying the URL, username, and password.
-    Connection connection = DriverManager.getConnection(url, user, password);
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:6060/miniProjekt", "root", "SabrinaMathilde")) {
 
-    public WishRepository() throws SQLException {}
+            //SQL query used to insert specified data into the database.
+            String SQL = "SELECT * FROM user WHERE email =?";
 
-    public void createUser(User user){
-        //SQL query used to insert specified data into the database.
-        String query = "INSERT INTO user(first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(SQL);
 
-        //The update query will be executed in the database to therefore be able to insert the new user with the specified values.
-        jdbcTemplate.update(query, user.getFirstName(), user.getLastName(), user.getPassword(), user.getPassword());
-    }
-
-    // Method to verifty a user by their email adress
-    public User getUserByEmail(String email){
-        //SQL query used to insert specified data into the database.
-        String query = "SELECT * FROM user WHERE email =?";
-
-        //Creates a rowMapper, that is used to map rows from a database query to objects of the User class in Java using the BeanPropertyRowMapper implementation.
-        RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
-
-        //Performs a SELECT query on the database using a jdbcTemplate object and maps the results to a list of User objects.
-        List<User> users = jdbcTemplate.query(query, rowMapper, email);
-
-        //if there are no users in the database with the specified email, null is returned.
-        return users.isEmpty() ? null : users.get(0);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return verifyByEmail(email);
     }
 
     // Method to create a new wishlist in the database
     public void createWishList(String name) {
-        //SQL query used to insert specified data into the database.
-        String query = "INSERT INTO wish_list (name) VALUES (?)";
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:6060/miniProjekt", "root", "SabrinaMathilde")) {
 
-        // Parameter for SQL-query
-        Object[] params = {name};
+            //SQL query used to insert specified data into the database.
+            String SQL = "INSERT INTO wish_list (name) VALUES (?)";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(SQL);
 
-        //Preforms tge SQL-query with the parameter via JdbcTemplate
-        jdbcTemplate.update(query, params);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+
+
+        }
     }
 
-    public static Optional<WishLists> findById(Long id) {
-       //String query =
+}
+
+        /*
+    public void findById(Long id) {
+       String query = "SELECT * FROM wish_list WHERE Wishlist_id =?";
 
         // Implementer logik for at finde en ønskeliste baseret på id og returnere den
         // Returner en Optional<WishList> for at håndtere tilfælde, hvor ønskelisten ikke findes
-        return WishRepository.findById(id);
+        //return WishRepository.findById(id);
     }
+        */
 
 
-    }
+
 
 
  /*
@@ -112,4 +107,3 @@ public class WishRepository {
 
 
 
-}
