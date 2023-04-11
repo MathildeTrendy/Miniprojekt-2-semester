@@ -4,20 +4,20 @@ package com.example.MiniProject.Model;
     public class WishLists {
 
     //Field of attributes
-    private String name;
+    private String WishlistName;
 
     //Constructor
-    public WishLists(String name) {
-        this.name = name;
+    public WishLists(String WishlistName) {
+        this.WishlistName = WishlistName;
     }
 
     //Setter and getter
-    public String getName() {
-        return name;
+    public String getWishlistName() {
+        return WishlistName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setWishlistName(String wishlistName) {
+        this.WishlistName = wishlistName;
     }
 
 

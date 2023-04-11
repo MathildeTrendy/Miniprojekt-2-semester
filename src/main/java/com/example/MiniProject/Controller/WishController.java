@@ -1,18 +1,13 @@
-package com.example.MiniProject;
+package com.example.MiniProject.Controller;
 
 import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Repository.WishRepository;
 import com.example.MiniProject.Service.ServiceWish;
 import com.example.MiniProject.Model.User;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("")
@@ -52,7 +47,7 @@ public class WishController {
     @RequestMapping(value = "/createWishList", method = RequestMethod.POST)
     public String createWishList(@RequestParam String name, Model model){
         //Creates the desired object based on input from the form
-        wishLists.setName(name);
+        wishLists.setWishlistName(name);
 
         //Store/save the wish list in the database
         serviceWish.createWishList(name);
@@ -65,20 +60,22 @@ public class WishController {
 
     }
 
-    @PostMapping("/wishlist/{id}/edit")
-    public String updateWishlist(@PathVariable("id") Long wishlistId, @RequestBody WishLists wishlists) {
-        // Find ønskelisten i databasen baseret på wishlistId
-        WishLists existingWishlists = wishRepository.findById(wishlistId).orElseThrow(() -> new RuntimeException("Wish list not found"));
+   @PostMapping("/edit")
+    public String editWishlist(@RequestParam("idWislist")Long id, @RequestParam("WishlistName") String WishlistName){
 
-        // Opdater ønskelistens oplysninger baseret på de nye værdier fra den modtagne wishlist
-        existingWishlists.setName(wishlists.getName());
+        //Find ønskelisten i databse baseret på id
 
-        // Gem den opdaterede ønskeliste i databasen
-        wishRepository.save(existingWishlists);
+       //Opdater ønskelistens oplysninger baseret på de nye værdier fra den modtagne wishlist
 
-        // Returner en bekræftelsesbesked eller en redirect til ønskelistens detaljeside
-        return "Wish lish updated";
-    }
+       //Gem den opdaterende ønskeliste i databasen
+
+       //Returner en bekræftelsesbesked eller en redirect til ønskelistens detaljeside
+        return "redirect:/wishList" + id;
+   }
+
+
+
+    /*
 
     @DeleteMapping("/wishlist/{id}/delete")
     public String deleteWishlist(@PathVariable("id") Long wishlistId) {
@@ -93,7 +90,7 @@ public class WishController {
     }
 
 
-
+*/
 
 }
 

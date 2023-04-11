@@ -5,8 +5,6 @@ import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Repository.WishRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class ServiceWish {
 
@@ -45,8 +43,12 @@ public class ServiceWish {
     public void createWishList(String name) {
         // Opret et ny ønskeliste baseret på navn ved hjælp af WishRepository
         WishLists wishLists = new WishLists(name);
-        wishLists.setName(name);
+        wishLists.setWishlistName(name);
         wishRepository.createWishList(name);
+    }
+
+    public  void editWishlist(String WishlistName){
+
     }
 
 

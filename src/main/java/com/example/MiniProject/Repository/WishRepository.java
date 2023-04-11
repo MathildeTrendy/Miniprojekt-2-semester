@@ -17,7 +17,7 @@ import java.util.Optional;
 @Repository
 public class WishRepository {
 
-    // JDBC-connection-object
+    // JDBC-connection-object - database handling
     private JdbcTemplate jdbcTemplate;
 
     // Constructor which inject the JdbcTemplate
@@ -70,12 +70,20 @@ public class WishRepository {
         jdbcTemplate.update(query, params);
     }
 
-
     public static Optional<WishLists> findById(Long id) {
+       //String query =
+
         // Implementer logik for at finde en ønskeliste baseret på id og returnere den
         // Returner en Optional<WishList> for at håndtere tilfælde, hvor ønskelisten ikke findes
         return WishRepository.findById(id);
     }
+
+
+    }
+
+
+ /*
+
 
     public static WishLists save(WishLists wishList) {
         // Implementer logik for at gemme en ønskeliste eller opdatere en eksisterende
@@ -88,7 +96,7 @@ public class WishRepository {
         // Implementer logik for at slette en ønskeliste baseret på id
         WishRepository.deleteById(id);
     }
-
+*/
 
 
 
