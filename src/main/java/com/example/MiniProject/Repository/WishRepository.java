@@ -1,8 +1,10 @@
 package com.example.MiniProject.Repository;
 
+import DTO.UserFormDTO;
 import com.example.MiniProject.Model.Items;
 import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Model.WishLists;
+import com.example.MiniProject.Utility.LoginSampleException;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -13,19 +15,30 @@ import java.util.Optional;
 public class WishRepository {
 
 
-    public void createUser(User user) throws SQLException {
+
+    public User createUser(UserFormDTO userDto) throws LoginSampleException {
         //Creates a database connection in Java by specifying the URL, username, and password.
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
-
             //SQL query used to insert specified data into the database.
             String SQL = "INSERT INTO user(first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(SQL);
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, userDto.getFirstName());
+            preparedStatement.setString(2, userDto.getLastName());
+            preparedStatement.setString(3, userDto.getEmail());
+            preparedStatement.setString(4, userDto.getPassword());
 
+            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+            resultSet.next();
+
+            long id = resultSet.getLong(1);
+            User user = new User(userDto.getFirstName(), userDto.getLastName(), userDto.getEmail(),  userDto.getPassword());
+            user.setId(id);
+            return user;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new LoginSampleException(e.getMessage());
         }
-
     }
 
     // Method to verify a user by their email adress

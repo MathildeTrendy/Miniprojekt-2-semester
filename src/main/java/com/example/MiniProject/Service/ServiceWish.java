@@ -10,14 +10,15 @@ import java.sql.SQLException;
 
 @Service
 public class ServiceWish {
+    /*
 
-    private WishRepository wishRepository;
+    private WishRepository;
 
     public ServiceWish(WishRepository wishRepository) {
         this.wishRepository = wishRepository;
     }
 
-    public void createUser(User user) throws InvalidInputException, SQLException {
+    public User createUser(User) throws InvalidInputException, SQLException {
         if (user.getFirstName() == null || user.getFirstName().isEmpty() ||
                 user.getLastName() == null || user.getLastName().isEmpty() ||
                 user.getEmail() == null || user.getEmail().isEmpty() ||
@@ -26,6 +27,7 @@ public class ServiceWish {
         }
 
         wishRepository.createUser(user);
+        return createUser(user);
     }
 
     public boolean verifyAccount(String email, String password) {
@@ -45,12 +47,17 @@ public class ServiceWish {
 
     public void createWishList(String name) {
         // Opret et ny ønskeliste baseret på navn ved hjælp af WishRepository
-        WishLists wishLists = new WishLists(name);
+        WishLists = new WishLists(name);
         wishLists.setWishlistName(name);
         wishRepository.createWishList(name);
     }
 
+
+
 }
+ */
+}
+
 
 
 
