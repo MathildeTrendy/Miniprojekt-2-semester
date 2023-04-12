@@ -15,7 +15,7 @@ public class WishRepository {
 
     public void createUser(User user) throws SQLException {
         //Creates a database connection in Java by specifying the URL, username, and password.
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:6060/miniProjekt", "root", "SabrinaMathilde")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
 
             //SQL query used to insert specified data into the database.
             String SQL = "INSERT INTO user(first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
@@ -31,7 +31,7 @@ public class WishRepository {
     // Method to verify a user by their email adress
     public User verifyByEmail(String email) {
 
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:6060/miniProjekt", "root", "SabrinaMathilde")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
 
             //SQL query used to insert specified data into the database.
             String SQL = "SELECT * FROM user WHERE email =?";
@@ -47,7 +47,7 @@ public class WishRepository {
 
     // Method to create a new wishlist in the database
     public void createWishList(String name) {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:6060/miniProjekt", "root", "SabrinaMathilde")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
 
             //SQL query used to insert specified data into the database.
             String SQL = "INSERT INTO wish_list (name) VALUES (?)";
@@ -63,7 +63,7 @@ public class WishRepository {
 
     // Metode til at opdatere en ønskeliste i databasen
     public void updateWishlist(WishLists wishlists) throws SQLException {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:6060/miniProjekt", "root", "SabrinaMathilde")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
             String SQL = "UPDATE wish_list SET name=? WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(SQL);
             statement.setString(1, wishlists.getWishlistName());
@@ -74,7 +74,7 @@ public class WishRepository {
 
     // Metode til at hente en ønskeliste fra databasen baseret på et givet ID
     public WishLists findById(int id) throws SQLException {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:6060/miniProjekt", "root", "SabrinaMathilde")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
             String SQL = "SELECT * FROM wish_list WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(SQL);
             statement.setInt(1, id);
