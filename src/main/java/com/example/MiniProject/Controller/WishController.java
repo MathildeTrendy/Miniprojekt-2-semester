@@ -5,6 +5,7 @@ import com.example.MiniProject.Repository.WishRepository;
 import com.example.MiniProject.Service.ServiceWish;
 import com.example.MiniProject.Model.User;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,12 @@ public class WishController {
     public WishController(ServiceWish serviceWish) {
         this.serviceWish = serviceWish;
     }
+
+    @GetMapping({"/", ""})
+    public String index(){
+        return "frontPage";
+    }
+
 
     @GetMapping("/signup")
     public String createUser(Model model) {
