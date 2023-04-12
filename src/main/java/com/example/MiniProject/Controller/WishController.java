@@ -1,10 +1,12 @@
 package com.example.MiniProject.Controller;
 
+import DTO.UserFormDTO;
 import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Repository.WishRepository;
 import com.example.MiniProject.Service.ServiceWish;
 import com.example.MiniProject.Model.User;
 
+import com.example.MiniProject.Utility.LoginSampleException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,7 +18,7 @@ import java.sql.SQLException;
 public class WishController {
 
     //Håndtere dataadgang.
-    private ServiceWish serviceWish;
+    ServiceWish serviceWish;
 
     public WishController(ServiceWish serviceWish) {
         this.serviceWish = serviceWish;
@@ -28,11 +30,27 @@ public class WishController {
     }
 
     @GetMapping("/signup")
-    public String createUser(Model model) {
-        model.addAttribute("user", new User());
+    public String showCreateUser(Model model) {
+        UserFormDTO user = new UserFormDTO();
+        model.addAttribute("user", user);
         return "signUp";
     }
 
+    @PostMapping("/signup/save")
+    public String createUser(@ModelAttribute("user") UserFormDTO userFormDTO, Model model) throws LoginSampleException {
+        if (userFormDTO.getFirstName() != null &&
+                userFormDTO.getLastName() != null &&
+                userFormDTO.getEmail() != null &&
+                userFormDTO.getPassword() != null) {
+            return "signupsucces";
+        } else {
+            return "redirect:/";
+            //TODO LAV EN HTML SIDE REDRICT
+        }
+
+    }
+
+/*
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String logIn(@RequestParam String email, @RequestParam String password, Model model) {
         if (serviceWish.verifyAccount(email, password)) {
