@@ -50,9 +50,7 @@ public class ServiceWish {
         wishRepository.createWishList(name);
     }
 
-    public  void editWishlist(String WishlistName){
 
-    }
 
 
 

@@ -18,7 +18,6 @@ public class WishController {
     //Håndtere dataadgang.
     private ServiceWish serviceWish;
 
-
     public WishController(ServiceWish serviceWish) {
         this.serviceWish = serviceWish;
     }
@@ -64,18 +63,31 @@ public class WishController {
         //alt i toppen er en deler
     }
 
-   @PostMapping("/edit")
-    public String editWishlist(@RequestParam("idWislist")Long id, @RequestParam("WishlistName") String WishlistName){
 
-        //Find ønskelisten i databse baseret på id
 
-       //Opdater ønskelistens oplysninger baseret på de nye værdier fra den modtagne wishlist
+    @PostMapping("/editWishlist/{id}")
+    public ResponseEntity<String> editWishlist(@PathVariable("id") int id, @RequestBody WishLists wishLists) {
+        try {
+            // Opret en instans af WishRepository
+            WishRepository wishRepository = new WishRepository();
 
-       //Gem den opdaterende ønskeliste i databasen
+            // Find ønskelisten i databasen baseret på id
+            wishRepository.findById(id);
 
-       //Returner en bekræftelsesbesked eller en redirect til ønskelistens detaljeside
-        return "redirect:/wishList" + id;
-   }
+            // Opdater ønskelistens oplysninger baseret på de nye værdier fra den modtagne wishlist
+            wishLists.setWishlistName(wishLists.getWishlistName());
+
+            // Gem den opdaterede ønskeliste i databasen
+            wishRepository.updateWishlist(wishLists);
+
+            // Returner en bekræftelsesbesked
+            return ResponseEntity.ok("Wishlist updated successfully");
+        } catch (SQLException ex) {
+            // Håndter eventuelle fejl og returner en fejlbesked
+            return ResponseEntity.badRequest().body("Failed to update wishlist: " + ex.getMessage());
+        }
+    }
+
 
 
 

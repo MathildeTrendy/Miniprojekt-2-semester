@@ -61,6 +61,36 @@ public class WishRepository {
         }
     }
 
+    // Metode til at opdatere en ønskeliste i databasen
+    public void updateWishlist(WishLists wishlists) throws SQLException {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:6060/miniProjekt", "root", "SabrinaMathilde")) {
+            String SQL = "UPDATE wish_list SET name=? WHERE id=?";
+            PreparedStatement statement = connection.prepareStatement(SQL);
+            statement.setString(1, wishlists.getWishlistName());
+            statement.setInt(2, wishlists.getId()); // Brug getId() til at få id'et for den ønskeliste, der skal opdateres
+            int resultSet = statement.executeUpdate();
+        }
+    }
+
+    // Metode til at hente en ønskeliste fra databasen baseret på et givet ID
+    public WishLists findById(int id) throws SQLException {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:6060/miniProjekt", "root", "SabrinaMathilde")) {
+            String SQL = "SELECT * FROM wish_list WHERE id=?";
+            PreparedStatement statement = connection.prepareStatement(SQL);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                WishLists wishlists = new WishLists(""); //hør lige de andre ad
+                wishlists.setId(resultSet.getInt("id")); // Bruges setId() til at sætte id'et på ønskelisten
+                wishlists.setWishlistName(resultSet.getString("name")); // Bruges til at sætte navnet på ønskelisten
+                return wishlists;
+            }
+        }
+        return null; // Returner null hvis ønskelisten ikke findes i databasen
+    }
+
+
+
 }
 
         /*
