@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 @Controller
-@RequestMapping("")
 public class WishController {
 
     //Håndtere dataadgang.
@@ -22,25 +21,19 @@ public class WishController {
         this.serviceWish = serviceWish;
     }
 
-    @PostMapping("/signup")
-    public ResponseEntity<String> createUser(@RequestBody User user) {
-        try {
-            serviceWish.createUser(user);
-            return ResponseEntity.ok("Account created");
-        } catch (ServiceWish.InvalidInputException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    @GetMapping("/signup")
+    public String createUser(Model model) {
+        model.addAttribute("user", new User());
+        return "signUp";
     }
 
-    @RequestMapping(value = "/logIn", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String logIn(@RequestParam String email, @RequestParam String password, Model model) {
         if (serviceWish.verifyAccount(email, password)) {
-            return "redirect:/wishList";
+            return "WishListPage";
         } else {
             model.addAttribute("LoginFailed", ""); // tilføjer en fejlbesked til modellen, som vises på login-siden, hvis brugeren ikke kan logge ind.
-            return "Log In";
+            return "login";
         }
     }
 
