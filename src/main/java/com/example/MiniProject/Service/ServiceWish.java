@@ -50,10 +50,6 @@ public class ServiceWish {
         wishRepository.createWishList(name);
     }
 
-
-
-
-
 }
 
 

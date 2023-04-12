@@ -62,8 +62,6 @@ public class WishController {
         //alt i toppen er en deler
     }
 
-
-
     @PostMapping("/editWishlist/{id}")
     public ResponseEntity<String> editWishlist(@PathVariable("id") int id, @RequestBody WishLists wishLists) {
         try {
@@ -87,11 +85,7 @@ public class WishController {
         }
     }
 
-
-
-
-    /*
-
+/*
     @DeleteMapping("/wishlist/{id}/delete")
     public String deleteWishlist(@PathVariable("id") Long wishlistId) {
         // Find ønskelisten i databasen baseret på wishlistId
@@ -105,7 +99,9 @@ public class WishController {
     }
 
 
-*/
+
+ */
+
 
 }
 
