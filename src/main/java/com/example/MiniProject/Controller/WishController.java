@@ -4,24 +4,22 @@ import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Repository.WishRepository;
 import com.example.MiniProject.Service.ServiceWish;
 import com.example.MiniProject.Model.User;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 @Controller
 @RequestMapping("")
 public class WishController {
 
     //Håndtere dataadgang.
     private ServiceWish serviceWish;
-    private Model model;
-    private WishRepository wishRepository;
-    private WishLists wishLists;
 
-    public WishController(ServiceWish serviceWish, Model model) {
+    public WishController(ServiceWish serviceWish) {
         this.serviceWish = serviceWish;
-        this.model = model;
     }
 
     @PostMapping("/signup")
@@ -31,6 +29,8 @@ public class WishController {
             return ResponseEntity.ok("Account created");
         } catch (ServiceWish.InvalidInputException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -47,6 +47,7 @@ public class WishController {
     @RequestMapping(value = "/createWishList", method = RequestMethod.POST)
     public String createWishList(@RequestParam String name, Model model){
         //Creates the desired object based on input from the form
+        WishLists wishLists = new WishLists(name);
         wishLists.setWishlistName(name);
 
         //Store/save the wish list in the database
@@ -58,20 +59,35 @@ public class WishController {
         //Redirect the user back to the wish list page/confirmation page
         return "redirect:/wishList";
 
+        //laver dem nede i metoden og over
+        //alt i toppen er en deler
     }
 
-   @PostMapping("/edit")
-    public String editWishlist(@RequestParam("idWislist")Long id, @RequestParam("WishlistName") String WishlistName){
 
-        //Find ønskelisten i databse baseret på id
 
-       //Opdater ønskelistens oplysninger baseret på de nye værdier fra den modtagne wishlist
+    @PostMapping("/editWishlist/{id}")
+    public ResponseEntity<String> editWishlist(@PathVariable("id") int id, @RequestBody WishLists wishLists) {
+        try {
+            // Opret en instans af WishRepository
+            WishRepository wishRepository = new WishRepository();
 
-       //Gem den opdaterende ønskeliste i databasen
+            // Find ønskelisten i databasen baseret på id
+            wishRepository.findById(id);
 
-       //Returner en bekræftelsesbesked eller en redirect til ønskelistens detaljeside
-        return "redirect:/wishList" + id;
-   }
+            // Opdater ønskelistens oplysninger baseret på de nye værdier fra den modtagne wishlist
+            wishLists.setWishlistName(wishLists.getWishlistName());
+
+            // Gem den opdaterede ønskeliste i databasen
+            wishRepository.updateWishlist(wishLists);
+
+            // Returner en bekræftelsesbesked
+            return ResponseEntity.ok("Wishlist updated successfully");
+        } catch (SQLException ex) {
+            // Håndter eventuelle fejl og returner en fejlbesked
+            return ResponseEntity.badRequest().body("Failed to update wishlist: " + ex.getMessage());
+        }
+    }
+
 
 
 
