@@ -27,7 +27,6 @@ public class WishController {
         return "frontPage";
     }
 
-
     @GetMapping("/signup")
     public String createUser(Model model) {
         model.addAttribute("user", new User());
