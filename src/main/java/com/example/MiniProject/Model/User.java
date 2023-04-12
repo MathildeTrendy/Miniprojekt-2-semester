@@ -15,7 +15,11 @@ package com.example.MiniProject.Model;
         this.password = password;
     }
 
-    //Getter and setter
+        public User() {
+
+        }
+
+        //Getter and setter
     public String getFirstName() {
         return firstName;
     }
