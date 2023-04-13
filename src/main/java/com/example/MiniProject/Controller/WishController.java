@@ -70,7 +70,7 @@ public class WishController {
     public String createWishlist(@RequestParam ("listName") String listName) {
         return "createWishlist";
     }
-
+//
 
     @PostMapping(value = "/createWishlist")
     public String createWishlist(@RequestParam ("email") String email, HttpSession userSession, Model model, @RequestParam ("listName")WishlistFormDTO listName){
