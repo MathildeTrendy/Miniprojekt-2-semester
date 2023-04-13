@@ -30,6 +30,7 @@ public class WishController {
         model.addAttribute("user", user);
         return "signUp";
     }
+
     @PostMapping("/signup/save")
     public String createUser(@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname, @RequestParam("email") String email, @RequestParam("password") String password) {
         if (!firstname.isEmpty() && !lastname.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
@@ -44,8 +45,8 @@ public class WishController {
         return signUpSucces();
     }
     @PostMapping(value = "/login")
-    public String logIn(@RequestParam String email, @RequestParam String password, Model model) throws LoginSampleException, SQLException {
-        if (wishRepository.verifyAccount(email, password)) {
+    public String logIn(@RequestParam("email") String email, @RequestParam ("password")String password, Model model) throws LoginSampleException, SQLException {
+        if (wishRepository.verifyAccount(email, password) != null) {
             return "WishListPage";
         } else {
             model.addAttribute("LoginFailed", ""); // tilføjer en fejlbesked til modellen, som vises på login-siden, hvis brugeren ikke kan logge ind.
