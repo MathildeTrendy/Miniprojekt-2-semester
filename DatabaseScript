@@ -1,0 +1,26 @@
+CREATE TABLE items(
+item_id INT NOT NULL AUTO_INCREMENT,
+itemName varchar(255) NOT NULL,
+itemDescription varchar(255) NOT NULL,
+itemPrice double,
+itemQuantity int,
+itemUrl varchar(255) NOT NULL,
+primary key(item_id)
+);
+
+CREATE TABLE user(
+user_id int NOT NULL AUTO_INCREMENT,
+firstName varchar(255) NOT NULL,
+lastName varchar(255) NOT NULL,
+email varchar(255) NOT NULL,
+primary key (user_id)
+);
+
+CREATE TABLE wishLists(
+list_id int NOT NULL AUTO_INCREMENT,
+listName varchar(255) NOT NULL,
+listUrl varchar(255) NOT NULL,
+primary key (list_id)
+);
+
+
