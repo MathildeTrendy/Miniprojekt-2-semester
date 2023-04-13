@@ -16,16 +16,15 @@
 </div>
 
 <div class="SignUpForm">
-    <form action="/signup/save" method="post">
-        <p>First name* <input type ="text" name="firstname"> </p>
-        <p>Last name* <input type ="text" name="lastname"> </p>
-        <p>E-mail* <input type ="text" name="email"></p>
-        <p>Password* <input type ="password" name="password"></p>
+    <form th:action="@{/signup}" th:object="${user}" method="post">
+        <p>First name* <input type ="text" th:field="*{firstName}"/> </p>
+        <p>Last name* <input type ="text" th:field="*{lastName}"/> </p>
+        <p>E-mail* <input type ="text" th:field="*{email}"/></p>
+        <p>Password* <input type ="password" th:field="*{password}"></p>
         <p>* required fields</p>
         <p><input type="submit" value="Sign up"/></p>
     </form>
 </div>
-
 </body>
 
 <style>

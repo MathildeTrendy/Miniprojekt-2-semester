@@ -37,7 +37,7 @@ public class WishController {
         return "signUp";
     }
 
-    @PostMapping("/signup/save")
+    @PostMapping("/signup")
     public String createUser(HttpServletRequest request, @ModelAttribute UserFormDTO userFormDTO) throws LoginSampleException {
         System.out.println("test");
         User user = wishRepository.createUser(userFormDTO);
