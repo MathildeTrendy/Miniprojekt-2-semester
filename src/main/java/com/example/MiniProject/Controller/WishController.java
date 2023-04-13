@@ -4,6 +4,8 @@ import DTO.UserFormDTO;
 import com.example.MiniProject.Repository.WishRepository;
 
 import com.example.MiniProject.Utility.LoginSampleException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,14 +23,15 @@ public class WishController {
 
     @GetMapping({"/", ""})
     public String index(){
-        return "frontPage";
+
+        return "redirect:/frontPage";
     }
 
     @GetMapping("/signup")
     public String showCreateUser(Model model) {
         UserFormDTO user = new UserFormDTO();
         model.addAttribute("user", user);
-        return "signUp";
+        return "redirect:/signUp";
     }
 
     @PostMapping("/signup/save")
@@ -42,20 +45,22 @@ public class WishController {
     }
     @GetMapping("signupsucces")
     public String signUpSucces(){
-        return signUpSucces();
+        return "redirect:/signUpSucces";
     }
     @PostMapping(value = "/login")
-    public String logIn(@RequestParam("email") String email, @RequestParam ("password")String password, Model model) throws LoginSampleException, SQLException {
-        if (wishRepository.verifyAccount(email, password) != null) {
-            return "WishListPage";
-        } else {
-            model.addAttribute("LoginFailed", ""); // tilføjer en fejlbesked til modellen, som vises på login-siden, hvis brugeren ikke kan logge ind.
-            return "login";
+    public String logIn(@RequestParam("email") String email, @RequestParam ("password")String password, Model model, HttpSession userSession) throws LoginSampleException, SQLException {
+        userSession.setAttribute("email", email);
+        userSession.getAttribute("email");
+        if (email.length() > 0) {
+            wishRepository.verifyAccount(email, password);
+            return "redirect:/WishListPage";
+        } else
+        { model.addAttribute("LoginFailed", ""); // tilføjer en fejlbesked til modellen, som vises på login-siden, hvis brugeren ikke kan logge ind.
+            return "redirect:/login";
         }
     }
-
     @GetMapping("/login")
-    public String Login(){
+    public String Login(@RequestParam ("email") String email, @RequestParam ("password")String password) {
         return "login";
     }
 
