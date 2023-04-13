@@ -22,6 +22,8 @@ A Scrum board has been set up in the GitHub project, where all the tasks for the
 
 ## Contact List
 
+If users have any questions or need assistance during their onboarding process, you can contact our team by GitHub account. Our team is dedicated to providing prompt and helpful support to ensure a smooth onboarding experience for new members.
+
 - <a href="https://github.com/najamoe">Naja Egede Moe (Scrum Master) </a>
 - <a href="https://github.com/MathildeTrendy">Mathilde Trend</a>
 - <a href="https://github.com/sabr5840">Sabrina Ebbesen</a>
