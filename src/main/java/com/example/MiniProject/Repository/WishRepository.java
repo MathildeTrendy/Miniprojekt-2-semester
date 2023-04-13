@@ -14,8 +14,6 @@ import java.util.Optional;
 @Repository
 public class WishRepository {
 
-
-
     public User createUser(UserFormDTO userDto) throws LoginSampleException {
         //Creates a database connection in Java by specifying the URL, username, and password.
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {

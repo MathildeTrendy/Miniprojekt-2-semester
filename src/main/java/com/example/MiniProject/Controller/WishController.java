@@ -47,11 +47,15 @@ public class WishController {
         }
     }
     @GetMapping("signupsucces")
-    public String signUpSucces(){
-        return signUpSucces();
+    public String signUpSucces(@RequestParam String email, @RequestParam String password, Model model) throws LoginSampleException {
+        if (wishRepository.verifyAccount(email, password)) {
+            return "redirect:/WishListPage";
+        } else {
+            model.addAttribute("LoginFailed", ""); // tilføjer en fejlbesked til modellen, som vises på login-siden, hvis brugeren ikke kan logge ind.
+            return "redirect/login";
+        }
     }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @PostMapping(value = "/login")
     public String logIn(@RequestParam String email, @RequestParam String password, Model model) throws LoginSampleException {
         if (wishRepository.verifyAccount(email, password)) {
             return "WishListPage";
@@ -59,6 +63,11 @@ public class WishController {
             model.addAttribute("LoginFailed", ""); // tilføjer en fejlbesked til modellen, som vises på login-siden, hvis brugeren ikke kan logge ind.
             return "login";
         }
+    }
+
+    @GetMapping("/login")
+    public String Login(){
+        return "login";
     }
 
 
