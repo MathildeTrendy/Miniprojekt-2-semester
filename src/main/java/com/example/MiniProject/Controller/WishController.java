@@ -1,6 +1,7 @@
 package com.example.MiniProject.Controller;
 
 import DTO.UserFormDTO;
+import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Repository.WishRepository;
 
 import com.example.MiniProject.Utility.LoginSampleException;
@@ -65,37 +66,19 @@ public class WishController {
     }
 
 
-
+    @PostMapping(value = "/createWishlist")
+    public String createWishlist(@RequestParam ("email") String email, HttpSession userSession, Model model){
+        userSession.setAttribute("email", email);
+        userSession.getAttribute("email");
+        if (email.length() > 0 ) {
+            wishRepository.createWishList(new WishLists(""));
+            return "redirect:/WishListPage";
+        } else
+            { model.addAttribute("Failed to create list", ""); // tilføjer en fejlbesked til modellen, som vises på login-siden, hvis brugeren ikke kan logge ind.
+                return "redirect:/createWishlist";
+            }
+    }
 /*
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String logIn(@RequestParam String email, @RequestParam String password, Model model) {
-        if (serviceWish.verifyAccount(email, password)) {
-            return "WishListPage";
-        } else {
-            model.addAttribute("LoginFailed", ""); // tilføjer en fejlbesked til modellen, som vises på login-siden, hvis brugeren ikke kan logge ind.
-            return "login";
-        }
-    }
-
-    @RequestMapping(value = "/createWishList", method = RequestMethod.POST)
-    public String createWishList(@RequestParam String name, Model model){
-        //Creates the desired object based on input from the form
-        WishLists wishLists = new WishLists(name);
-        wishLists.setWishlistName(name);
-
-        //Store/save the wish list in the database
-        serviceWish.createWishList(name);
-
-        //Confirmation message to the model
-        model.addAttribute("message", "Wish list has been created");
-
-        //Redirect the user back to the wish list page/confirmation page
-        return "redirect:/wishList";
-
-        //laver dem nede i metoden og over
-        //alt i toppen er en deler
-    }
-
     @PostMapping("/editWishlist/{id}")
     public ResponseEntity<String> editWishlist(@PathVariable("id") int id, @RequestBody WishLists wishLists) {
         try {
