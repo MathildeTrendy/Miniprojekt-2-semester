@@ -3,19 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>WishListFreak</title>
-    <link rel="stylesheet" type="text/css" th:href="@{../static/css/Stylesheet.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Web-based application for creating wishlists">
 </head>
-<div class ="header">
-    <div class="header-left">
-        <a href ="frontPage.html">
-        <img src="/imgs/logo.png" alt="Logo" class="logoresponsive"></a>
-    </div>
+<div class="logoheader">
+    <img src="/imgs/logo.png" alt="Logo" class="logoFrontpage">
 </div>
 
 <body>
-<div class="header-right">
+<div class="signup/login">
     <a href="signUp.html" class="button">
         <div class="button__line"></div>
         <div class="button__line"></div>
@@ -34,4 +30,22 @@
 
 </div>
 </body>
+
+<style>
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        height: 800px;
+        background: linear-gradient(to bottom, #ffffff 20%, #cac6f7 100%);
+    }
+
+    .logoheader{
+        display: flex;
+        justify-content: center;
+    }
+    .logoFrontpage {
+        width: 60%;
+    }
+
+</style>
 </html>
