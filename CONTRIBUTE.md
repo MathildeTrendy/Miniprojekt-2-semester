@@ -22,6 +22,6 @@ A Scrum board has been set up in the GitHub project, where all the tasks for the
 
 ## Contact List
 
-- Naja Egede Moe (Scrum Master)
-- Mathilde Trend
-- Sabrina Ebbesen
+- <a href="https://github.com/najamoe">Naja Egede Moe (Scrum Master) </a>
+- <a href="https://github.com/MathildeTrendy">Mathilde Trend</a>
+- <a href="https://github.com/sabr5840">Sabrina Ebbesen</a>
