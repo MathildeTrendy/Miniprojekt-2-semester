@@ -66,6 +66,11 @@ public class WishController {
         return "login";
     }
 
+    @GetMapping("/createWishlist")
+    public String createWishlist(@RequestParam ("listName") String listName) {
+        return "createWishlist";
+    }
+
 
     @PostMapping(value = "/createWishlist")
     public String createWishlist(@RequestParam ("email") String email, HttpSession userSession, Model model, @RequestParam ("listName")WishlistFormDTO listName){
@@ -78,6 +83,7 @@ public class WishController {
             { model.addAttribute("Failed to create list", "");
                 return "redirect:/createWishlist";
             }
+
     }
 /*
     @PostMapping("/editWishlist/{id}")
