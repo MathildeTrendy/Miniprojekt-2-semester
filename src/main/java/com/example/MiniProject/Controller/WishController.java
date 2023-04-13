@@ -38,17 +38,18 @@ public class WishController {
     }
 
     @PostMapping("/signup/save")
-    public String createUser(@ModelAttribute("user") UserFormDTO userFormDTO, Model model) throws LoginSampleException {
-        if (userFormDTO.getFirstName() != null &&
-                userFormDTO.getLastName() != null &&
-                userFormDTO.getEmail() != null &&
-                userFormDTO.getPassword() != null) {
-            return "signupsucces";
+    public String createUser(@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname, @RequestParam("email") String email, @RequestParam("password") String password) {
+        System.out.println("called");
+        System.out.println(firstname);
+        System.out.println(lastname);
+        System.out.println(email);
+        System.out.println(password);
+        if (!firstname.isEmpty() && !lastname.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
+            UserFormDTO userFormDTO = new UserFormDTO(firstname, lastname, email, password);
+            return "redirect:/signUpSucces";
         } else {
             return "redirect:/signupfail";
-            //TODO LAV EN HTML SIDE REDRICT
         }
-
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

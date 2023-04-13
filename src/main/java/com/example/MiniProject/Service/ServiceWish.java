@@ -25,7 +25,6 @@ public class ServiceWish {
                 user.getPassword() == null || user.getPassword().isEmpty()) {
             throw new InvalidInputException("All fields must be filled");
         }
-
         wishRepository.createUser(user);
         return createUser(user);
     }

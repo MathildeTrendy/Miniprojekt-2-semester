@@ -17,6 +17,9 @@ public class UserFormDTO {
     }
     public UserFormDTO(){}
 
+    public UserFormDTO(String firstname, String lastname, String email, String password) {
+    }
+
     public long getUser_id() {
         return user_id;
     }
