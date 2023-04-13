@@ -46,7 +46,7 @@ public class WishController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String logIn(@RequestParam String email, @RequestParam String password, Model model) throws LoginSampleException, SQLException {
+    public String logIn(@RequestParam ("email")String email, @RequestParam ("password") String password, Model model) throws LoginSampleException, SQLException {
         if (wishRepository.verifyAccount(email, password)!= null) {
             return "WishListPage";
         } else {
