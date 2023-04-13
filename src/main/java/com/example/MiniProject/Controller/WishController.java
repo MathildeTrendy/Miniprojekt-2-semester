@@ -2,6 +2,7 @@ package com.example.MiniProject.Controller;
 
 import DTO.UserFormDTO;
 import com.example.MiniProject.Model.WishLists;
+import com.example.MiniProject.Repository.IRepository;
 import com.example.MiniProject.Repository.WishRepository;
 import com.example.MiniProject.Service.ServiceWish;
 import com.example.MiniProject.Model.User;
@@ -18,10 +19,10 @@ import java.sql.SQLException;
 public class WishController {
 
     //Håndtere dataadgang.
-    ServiceWish serviceWish;
+    WishRepository wishRepository;
 
-    public WishController(ServiceWish serviceWish) {
-        this.serviceWish = serviceWish;
+    public WishController(WishRepository wishRepository) {
+        this.wishRepository = wishRepository;
     }
 
     @GetMapping({"/", ""})
@@ -49,6 +50,18 @@ public class WishController {
         }
 
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String logIn(@RequestParam String email, @RequestParam String password, Model model) throws LoginSampleException {
+        if (wishRepository.verifyAccount(email, password)) {
+            return "WishListPage";
+        } else {
+            model.addAttribute("LoginFailed", ""); // tilføjer en fejlbesked til modellen, som vises på login-siden, hvis brugeren ikke kan logge ind.
+            return "login";
+        }
+    }
+
+
 
 /*
     @RequestMapping(value = "/login", method = RequestMethod.POST)

@@ -74,6 +74,64 @@ public class WishRepository {
         }
     }
 
+
+    public boolean verifyAccount (String email, String password) throws LoginSampleException {
+        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
+
+            String SQL = "SELECT COUNT (*) AS count from user WHERE email=? AND password=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            int count = resultSet.getInt("count");
+            return count == 1;
+        }catch (SQLException e){
+            e.printStackTrace();
+            throw new LoginSampleException ("Wrong email or password, try again");
+
+
+        }
+
+    }
+
+
+    /*
+    public boolean verifyAccount(String email, String password) {
+    try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
+        String SQL = "SELECT COUNT(*) AS count FROM user WHERE email=? AND password=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+        preparedStatement.setString(1, email);
+        preparedStatement.setString(2, password);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        int count = resultSet.getInt("count");
+        return count == 1; // Returnerer true, hvis der findes en bruger med den angivne e-mail og adgangskode, ellers false.
+    } catch (SQLException e) {
+        // Håndter fejl, f.eks. logning eller kast en egendefineret exception
+        e.printStackTrace();
+        return false; // eller kast en LoginSampleException
+    }
+}
+
+
+
+
+
+
+
+    public boolean verifyAccount(String email, String password) {
+        User user = wishRepository.verifyByEmail(email);
+        if (user != null && user.getPassword().equals(password)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+     */
+
     // Metode til at opdatere en ønskeliste i databasen
     public void updateWishlist(WishLists wishlists) throws SQLException {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
