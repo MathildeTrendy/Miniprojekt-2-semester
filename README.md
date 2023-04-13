@@ -23,3 +23,7 @@ We have a dedicated team working on continuously improving the user experience o
 ## Contact Information
 
 If users have any questions or need assistance during their onboarding process, they can contact our customer support team at [email address] or call [phone number]. Our team is dedicated to providing prompt and helpful support to ensure a smooth onboarding experience for our users.
+
+- <a href="https://github.com/najamoe">Naja Egede Moe (Scrum Master) </a>
+- <a href="https://github.com/MathildeTrendy">Mathilde Trend</a>
+- <a href="https://github.com/sabr5840">Sabrina Ebbesen</a>
