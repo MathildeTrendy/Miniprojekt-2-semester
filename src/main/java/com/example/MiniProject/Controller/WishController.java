@@ -40,7 +40,7 @@ public class WishController {
     public String createUser(@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname, @RequestParam("email") String email, @RequestParam("password") String password) {
         if (!firstname.isEmpty() && !lastname.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
             UserFormDTO userFormDTO = new UserFormDTO(firstname, lastname, email, password);
-            return "redirect:/signupsucces";
+            return "signupsucces";
         } else {
             return "redirect:/signupfail";
         }

@@ -17,7 +17,7 @@ public class WishRepository {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
             //SQL query used to insert specified data into the database.
 
-            String SQL = "INSERT INTO user(first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
+            String SQL = "INSERT INTO miniprojekt.user(first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, userDto.getFirstName());
