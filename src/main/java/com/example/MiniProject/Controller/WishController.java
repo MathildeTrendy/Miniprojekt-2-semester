@@ -1,15 +1,9 @@
 package com.example.MiniProject.Controller;
 
 import DTO.UserFormDTO;
-import com.example.MiniProject.Model.WishLists;
-import com.example.MiniProject.Repository.IRepository;
 import com.example.MiniProject.Repository.WishRepository;
-import com.example.MiniProject.Service.ServiceWish;
-import com.example.MiniProject.Model.User;
 
 import com.example.MiniProject.Utility.LoginSampleException;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -52,15 +46,15 @@ public class WishController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String logIn(@RequestParam String email, @RequestParam String password, Model model) throws LoginSampleException {
-        if (wishRepository.verifyAccount(email, password)) {
+    public String logIn(@RequestParam String email, @RequestParam String password, Model model) throws LoginSampleException, SQLException {
+        if (wishRepository.verifyAccount(email, password)!= null) {
             return "WishListPage";
         } else {
             model.addAttribute("LoginFailed", ""); // tilføjer en fejlbesked til modellen, som vises på login-siden, hvis brugeren ikke kan logge ind.
             return "login";
+            //TODO SKAL DER VÆRE EN LOGINFAIL PAGE
         }
     }
-
 
 
 /*

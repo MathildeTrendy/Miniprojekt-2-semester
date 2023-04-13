@@ -1,26 +1,23 @@
 package com.example.MiniProject.Repository;
 
 import DTO.UserFormDTO;
-import com.example.MiniProject.Model.Items;
 import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Utility.LoginSampleException;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class WishRepository {
-
-
 
     public User createUser(UserFormDTO userDto) throws LoginSampleException {
         //Creates a database connection in Java by specifying the URL, username, and password.
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
             //SQL query used to insert specified data into the database.
+
             String SQL = "INSERT INTO user(first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
+
             PreparedStatement preparedStatement = connection.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, userDto.getFirstName());
             preparedStatement.setString(2, userDto.getLastName());
@@ -33,30 +30,52 @@ public class WishRepository {
             resultSet.next();
 
             long id = resultSet.getLong(1);
-            User user = new User(userDto.getFirstName(), userDto.getLastName(), userDto.getEmail(),  userDto.getPassword());
+
+            User user = new User(userDto.getFirstName(), userDto.getLastName(), userDto.getEmail(), userDto.getPassword());
+
             user.setId(id);
+
             return user;
+
         } catch (SQLException e) {
+
             throw new LoginSampleException(e.getMessage());
         }
     }
 
     // Method to verify a user by their email adress
-    public User verifyByEmail(String email) {
+    public User verifyAccount(String email, String password) throws LoginSampleException, SQLException {
 
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
 
             //SQL query used to insert specified data into the database.
-            String SQL = "SELECT * FROM user WHERE email =?";
+            String SQL = "SELECT * FROM user WHERE email = ? AND password = ?";
 
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(SQL);
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                long id = resultSet.getLong("id");
+                String firtName = resultSet.getString("firstname");
+                String lastName = resultSet.getString("lastname");
+
+                User user = new User(email, password, firtName, lastName);
+
+                user.setId(id);
+
+                return user;
+            } else {
+                throw new LoginSampleException("Could not validate user");
+            }
+        }catch (SQLException e){
+            throw new LoginSampleException(e.getMessage());
         }
-        return verifyByEmail(email);
     }
+
 
     // Method to create a new wishlist in the database
     public void createWishList(String name) {
@@ -70,67 +89,9 @@ public class WishRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
 
-
         }
     }
 
-
-    public boolean verifyAccount (String email, String password) throws LoginSampleException {
-        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
-
-            String SQL = "SELECT COUNT (*) AS count from user WHERE email=? AND password=?";
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, email);
-            preparedStatement.setString(2, password);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            int count = resultSet.getInt("count");
-            return count == 1;
-        }catch (SQLException e){
-            e.printStackTrace();
-            throw new LoginSampleException ("Wrong email or password, try again");
-
-
-        }
-
-    }
-
-
-    /*
-    public boolean verifyAccount(String email, String password) {
-    try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
-        String SQL = "SELECT COUNT(*) AS count FROM user WHERE email=? AND password=?";
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-        preparedStatement.setString(1, email);
-        preparedStatement.setString(2, password);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        int count = resultSet.getInt("count");
-        return count == 1; // Returnerer true, hvis der findes en bruger med den angivne e-mail og adgangskode, ellers false.
-    } catch (SQLException e) {
-        // Håndter fejl, f.eks. logning eller kast en egendefineret exception
-        e.printStackTrace();
-        return false; // eller kast en LoginSampleException
-    }
-}
-
-
-
-
-
-
-
-    public boolean verifyAccount(String email, String password) {
-        User user = wishRepository.verifyByEmail(email);
-        if (user != null && user.getPassword().equals(password)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-     */
 
     // Metode til at opdatere en ønskeliste i databasen
     public void updateWishlist(WishLists wishlists) throws SQLException {
@@ -159,9 +120,6 @@ public class WishRepository {
         }
         return null; // Returner null hvis ønskelisten ikke findes i databasen
     }
-
-
-
 }
 
         /*
