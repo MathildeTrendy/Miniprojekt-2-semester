@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>WishListFreak</title>
-    <link rel="stylesheet" type="text/css" href="Stylesheet.css">
+    <link rel="stylesheet" type="text/css" xmlns:th="http://www.thymeleaf.org">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Web-based application for creating wishlists">
 </head>
 <div class ="header">
     <div class="header-left">
         <a href ="frontPage.html">
-            <img src="/logo.png" alt="Logo" class="logoresponsive"></a>
+            <img src="/imgs/logo.png" alt="Logo" class="logoresponsive"></a>
     </div>
 </div>
 <body>
 <div class="SignInForm">
-    <form action ="#" th:action="@{/login}" th:object="${user}" method="post">
+    <form action="/login" method="post">
 
-        <p>E-mail* <input type ="text" th:field="*{email}"></p>
-        <p>Password* <input type ="text" th:field="*{password}"></p>
+        <p>E-mail* <input type ="text" name="email"></p>
+        <p>Password* <input type ="password" name="password"></p>
         <p> * required fields</p>
         <p><input type="submit" value="Sign In" />
     </form>
