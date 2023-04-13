@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>WishListFreak</title>
-    <link rel="stylesheet" type="text/css" href="Stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="src/main/resources/templates/Stylesheet.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Web-based application for creating wishlists">
 </head>
@@ -20,13 +20,13 @@
 </div>
 
 <div class="SignUpForm">
-    <form action ="#" th:action="@{/signup}" th:object="${user}" method="post">
-        <p>First name* <input type ="text" th:field="*{firstName}"></p>
-        <p>Last name* <input type ="text" th:field="*{lastName}"></p>
-        <p>E-mail* <input type ="text" th:field="*{email}"></p>
-        <p>Password* <input type ="text" th:field="*{password}"></p>
+    <form action="/signup/save" method="post">
+        <p>First name* <input type ="text" name="firstname"> </p>
+        <p>Last name* <input type ="text" name="lastname"> </p>
+        <p>E-mail* <input type ="text" name="email"></p>
+        <p>Password* <input type ="text" name="password"></p>
         <p>* required fields</p>
-        <p><button type="submit" value="Sign Up"></p>
+        <p><input type="submit"/></p>
     </form>
 </div>
 
