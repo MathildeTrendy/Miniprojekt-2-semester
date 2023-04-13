@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+//Denne klasse er en singleton
 public class ManagerDb {
 
     private static Connection connection = null;

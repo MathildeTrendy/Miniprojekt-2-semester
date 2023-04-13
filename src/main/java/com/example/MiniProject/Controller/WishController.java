@@ -1,6 +1,8 @@
 package com.example.MiniProject.Controller;
 
 import DTO.UserFormDTO;
+import DTO.WishlistFormDTO;
+import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Repository.WishRepository;
 
 import com.example.MiniProject.Utility.LoginSampleException;
@@ -23,6 +25,7 @@ public class WishController {
 
     @GetMapping({"/", ""})
     public String index(){
+
         return "frontPage";
     }
 
@@ -33,25 +36,18 @@ public class WishController {
         return "signUp";
     }
 
-    //SIGN UP RETURN statements working - DO NOT EDIT!
     @PostMapping("/signup/save")
     public String createUser(@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname, @RequestParam("email") String email, @RequestParam("password") String password) {
         if (!firstname.isEmpty() && !lastname.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
             UserFormDTO userFormDTO = new UserFormDTO(firstname, lastname, email, password);
             return "redirect:/signupsucces";
         } else {
-            return "signupfail";
+            return "redirect:/signupfail";
         }
     }
-    //Signupsucces virker, DO NOT FUCKING TOUCH!
     @GetMapping("signupsucces")
     public String signUpSucces(){
-        return "signUpSucces";
-    }
-    //Signupfail virker, DO NOT FUCKING TOUCH!
-    @GetMapping("signupfail")
-    public String signupfail(){
-        return "signupfail";
+        return "redirect:/signUpSucces";
     }
     @PostMapping(value = "/login")
     public String logIn(@RequestParam("email") String email, @RequestParam ("password")String password, Model model, HttpSession userSession) throws LoginSampleException, SQLException {
@@ -59,49 +55,37 @@ public class WishController {
         userSession.getAttribute("email");
         if (email.length() > 0) {
             wishRepository.verifyAccount(email, password);
-            return "WishListPage";
+            return "redirect:/WishListPage";
         } else
         { model.addAttribute("LoginFailed", ""); // tilføjer en fejlbesked til modellen, som vises på login-siden, hvis brugeren ikke kan logge ind.
             return "redirect:/login";
         }
     }
-
-    //WORKING! DO NOT FUCKING TOUCH!
     @GetMapping("/login")
-    public String Login() {
+    public String Login(@RequestParam ("email") String email, @RequestParam ("password")String password) {
         return "login";
     }
 
+    @GetMapping("/createWishlist")
+    public String createWishlist(@RequestParam ("listName") String listName) {
+        return "createWishlist";
+    }
+//
+
+    @PostMapping(value = "/createWishlist")
+    public String createWishlist(@RequestParam ("email") String email, HttpSession userSession, Model model, @RequestParam ("listName")WishlistFormDTO listName){
+        userSession.setAttribute("email", email);
+        userSession.getAttribute("email");
+        if (email.length() > 0 ) {
+            wishRepository.createWishList(listName);
+            return "redirect:/WishListPage";
+        } else
+            { model.addAttribute("Failed to create list", "");
+                return "redirect:/createWishlist";
+            }
+
+    }
 /*
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String logIn(@RequestParam String email, @RequestParam String password, Model model) {
-        if (serviceWish.verifyAccount(email, password)) {
-            return "WishListPage";
-        } else {
-            model.addAttribute("LoginFailed", ""); // tilføjer en fejlbesked til modellen, som vises på login-siden, hvis brugeren ikke kan logge ind.
-            return "login";
-        }
-    }
-
-    @RequestMapping(value = "/createWishList", method = RequestMethod.POST)
-    public String createWishList(@RequestParam String name, Model model){
-        //Creates the desired object based on input from the form
-        WishLists wishLists = new WishLists(name);
-        wishLists.setWishlistName(name);
-
-        //Store/save the wish list in the database
-        serviceWish.createWishList(name);
-
-        //Confirmation message to the model
-        model.addAttribute("message", "Wish list has been created");
-
-        //Redirect the user back to the wish list page/confirmation page
-        return "redirect:/wishList";
-
-        //laver dem nede i metoden og over
-        //alt i toppen er en deler
-    }
-
     @PostMapping("/editWishlist/{id}")
     public ResponseEntity<String> editWishlist(@PathVariable("id") int id, @RequestBody WishLists wishLists) {
         try {

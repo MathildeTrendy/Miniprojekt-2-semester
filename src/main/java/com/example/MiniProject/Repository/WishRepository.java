@@ -1,6 +1,7 @@
 package com.example.MiniProject.Repository;
 
 import DTO.UserFormDTO;
+import DTO.WishlistFormDTO;
 import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Utility.LoginSampleException;
@@ -78,19 +79,31 @@ public class WishRepository {
 
 
     // Method to create a new wishlist in the database
-    public void createWishList(String name) {
+    public int createWishList(WishlistFormDTO wishlistFormDTO) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
 
-            //SQL query used to insert specified data into the database.
-            String SQL = "INSERT INTO wish_list (name) VALUES (?)";
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(SQL);
+                //SQL query used to insert specified data into the database.
+            String SQL = "INSERT INTO wishLists " +
+                    "(listName)" +
+                    "VALUES (\""+
+                    wishlistFormDTO.getListName()+ "\")";
 
-        } catch (SQLException e) {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.execute();
+
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+            int generatedKey = 0;
+
+            if (resultSet.next()) {
+                generatedKey = resultSet.getInt(1);
+            }
+            return generatedKey;
+
+            } catch (SQLException e) {
             throw new RuntimeException(e);
-
+            }
         }
-    }
 
 
     // Metode til at opdatere en ønskeliste i databasen
