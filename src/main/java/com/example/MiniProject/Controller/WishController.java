@@ -45,7 +45,7 @@ public class WishController {
                 userFormDTO.getPassword() != null) {
             return "signupsucces";
         } else {
-            return "redirect:/";
+            return "redirect:/signupfail";
             //TODO LAV EN HTML SIDE REDRICT
         }
 
