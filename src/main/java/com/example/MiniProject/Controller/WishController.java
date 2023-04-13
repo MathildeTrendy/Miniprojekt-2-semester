@@ -1,6 +1,7 @@
 package com.example.MiniProject.Controller;
 
 import DTO.UserFormDTO;
+import DTO.WishlistFormDTO;
 import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Repository.WishRepository;
 
@@ -67,14 +68,14 @@ public class WishController {
 
 
     @PostMapping(value = "/createWishlist")
-    public String createWishlist(@RequestParam ("email") String email, HttpSession userSession, Model model){
+    public String createWishlist(@RequestParam ("email") String email, HttpSession userSession, Model model, @RequestParam ("listName")WishlistFormDTO listName){
         userSession.setAttribute("email", email);
         userSession.getAttribute("email");
         if (email.length() > 0 ) {
-            wishRepository.createWishList(new WishLists(""));
+            wishRepository.createWishList(listName);
             return "redirect:/WishListPage";
         } else
-            { model.addAttribute("Failed to create list", ""); // tilføjer en fejlbesked til modellen, som vises på login-siden, hvis brugeren ikke kan logge ind.
+            { model.addAttribute("Failed to create list", "");
                 return "redirect:/createWishlist";
             }
     }

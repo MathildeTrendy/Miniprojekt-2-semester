@@ -1,6 +1,7 @@
 package com.example.MiniProject.Repository;
 
 import DTO.UserFormDTO;
+import DTO.WishlistFormDTO;
 import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Utility.LoginSampleException;
@@ -78,14 +79,14 @@ public class WishRepository {
 
 
     // Method to create a new wishlist in the database
-    public int createWishList(WishLists wishLists) {
+    public int createWishList(WishlistFormDTO wishlistFormDTO) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
 
                 //SQL query used to insert specified data into the database.
             String SQL = "INSERT INTO wishLists " +
                     "(listName)" +
                     "VALUES (\""+
-                    wishLists.getWishlistName()+ "\")";
+                    wishlistFormDTO.getListName()+ "\")";
 
             PreparedStatement preparedStatement = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.execute();
