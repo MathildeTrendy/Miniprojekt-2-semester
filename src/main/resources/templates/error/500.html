@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>error500</title>
-    <link rel="stylesheet" type="text/css" href="Stylesheet.css">
+    <link rel="stylesheet" type="text/css" th:href="@{../static/css/Stylesheet.css}">
 </head>
 
-<body>
-
-<img src="/error500.png" alt="error500Image" class="Errorsmiley">
+<body><h1>error 500</h1>
 <button onclick="window.history.back()">Back</button>
 
 </body>

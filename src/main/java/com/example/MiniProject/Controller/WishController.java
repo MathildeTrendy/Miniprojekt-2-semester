@@ -33,18 +33,25 @@ public class WishController {
         return "signUp";
     }
 
+    //SIGN UP RETURN statements working - DO NOT EDIT!
     @PostMapping("/signup/save")
     public String createUser(@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname, @RequestParam("email") String email, @RequestParam("password") String password) {
         if (!firstname.isEmpty() && !lastname.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
             UserFormDTO userFormDTO = new UserFormDTO(firstname, lastname, email, password);
             return "redirect:/signupsucces";
         } else {
-            return "redirect:/signupfail";
+            return "signupfail";
         }
     }
+    //Signupsucces virker, DO NOT FUCKING TOUCH!
     @GetMapping("signupsucces")
     public String signUpSucces(){
         return "signUpSucces";
+    }
+    //Signupfail virker, DO NOT FUCKING TOUCH!
+    @GetMapping("signupfail")
+    public String signupfail(){
+        return "signupfail";
     }
     @PostMapping(value = "/login")
     public String logIn(@RequestParam("email") String email, @RequestParam ("password")String password, Model model, HttpSession userSession) throws LoginSampleException, SQLException {
@@ -52,18 +59,18 @@ public class WishController {
         userSession.getAttribute("email");
         if (email.length() > 0) {
             wishRepository.verifyAccount(email, password);
-            return "redirect:/WishListPage";
+            return "WishListPage";
         } else
         { model.addAttribute("LoginFailed", ""); // tilføjer en fejlbesked til modellen, som vises på login-siden, hvis brugeren ikke kan logge ind.
             return "redirect:/login";
         }
     }
+
+    //WORKING! DO NOT FUCKING TOUCH!
     @GetMapping("/login")
-    public String Login(@RequestParam ("email") String email, @RequestParam ("password")String password) {
+    public String Login() {
         return "login";
     }
-
-
 
 /*
     @RequestMapping(value = "/login", method = RequestMethod.POST)
