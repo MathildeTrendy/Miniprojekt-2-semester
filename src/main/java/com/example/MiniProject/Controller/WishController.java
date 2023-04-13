@@ -62,7 +62,7 @@ public class WishController {
         }
     }
     @GetMapping("/login")
-    public String Login(@RequestParam ("email") String email, @RequestParam ("password")String password) {
+    public String Login() {
         return "login";
     }
 
