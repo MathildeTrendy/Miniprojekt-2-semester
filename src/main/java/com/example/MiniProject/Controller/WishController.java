@@ -24,14 +24,14 @@ public class WishController {
     @GetMapping({"/", ""})
     public String index(){
 
-        return "redirect:/frontPage";
+        return "frontPage";
     }
 
     @GetMapping("/signup")
     public String showCreateUser(Model model) {
         UserFormDTO user = new UserFormDTO();
         model.addAttribute("user", user);
-        return "redirect:/signUp";
+        return "signUp";
     }
 
     @PostMapping("/signup/save")
