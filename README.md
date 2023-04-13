@@ -1,8 +1,5 @@
 # Onboarding of New Users
 
-
-## onboarding-proces for en bruger:
-
 ## Velkomst og introduktion
 Start med at byde den nye bruger velkommen til tjenesten eller applikationen. Indfør dem til det grundlæggende og forklar, hvad de kan forvente af onboarding-processen. Giv også en kort introduktion til tjenestens formål eller applikationens funktioner.
 
