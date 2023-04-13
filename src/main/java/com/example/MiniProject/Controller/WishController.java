@@ -39,17 +39,16 @@ public class WishController {
 
     @PostMapping("/signup/save")
     public String createUser(@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname, @RequestParam("email") String email, @RequestParam("password") String password) {
-        System.out.println("called");
-        System.out.println(firstname);
-        System.out.println(lastname);
-        System.out.println(email);
-        System.out.println(password);
         if (!firstname.isEmpty() && !lastname.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
             UserFormDTO userFormDTO = new UserFormDTO(firstname, lastname, email, password);
-            return "redirect:/signUpSucces";
+            return "redirect:/signupsucces";
         } else {
             return "redirect:/signupfail";
         }
+    }
+    @GetMapping("signupsucces")
+    public String signUpSucces(){
+        return signUpSucces();
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
