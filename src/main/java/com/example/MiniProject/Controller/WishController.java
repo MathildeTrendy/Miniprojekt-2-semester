@@ -23,7 +23,6 @@ public class WishController {
 
     @GetMapping({"/", ""})
     public String index(){
-
         return "frontPage";
     }
 
@@ -45,7 +44,7 @@ public class WishController {
     }
     @GetMapping("signupsucces")
     public String signUpSucces(){
-        return "redirect:/signUpSucces";
+        return "signUpSucces";
     }
     @PostMapping(value = "/login")
     public String logIn(@RequestParam("email") String email, @RequestParam ("password")String password, Model model, HttpSession userSession) throws LoginSampleException, SQLException {
