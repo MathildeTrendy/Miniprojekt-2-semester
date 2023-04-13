@@ -2,6 +2,7 @@ package com.example.MiniProject.Controller;
 
 import DTO.UserFormDTO;
 import DTO.WishlistFormDTO;
+import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Repository.WishRepository;
 
@@ -37,9 +38,11 @@ public class WishController {
     }
 
     @PostMapping("/signup/save")
-    public String createUser(@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname, @RequestParam("email") String email, @RequestParam("password") String password) {
-        if (!firstname.isEmpty() && !lastname.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-            UserFormDTO userFormDTO = new UserFormDTO(firstname, lastname, email, password);
+    public String createUser(HttpServletRequest request, @ModelAttribute UserFormDTO userFormDTO) throws LoginSampleException {
+        System.out.println("test");
+        User user = wishRepository.createUser(userFormDTO);
+        if (user != null){
+            request.getSession().setAttribute("email", user.getEmail());
             return "signupsucces";
         } else {
             return "redirect:/signupfail";

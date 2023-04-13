@@ -12,18 +12,18 @@ import java.sql.*;
 @Repository
 public class WishRepository {
 
-    public User createUser(UserFormDTO userDto) throws LoginSampleException {
+    public User createUser(UserFormDTO userDTO) throws LoginSampleException {
         //Creates a database connection in Java by specifying the URL, username, and password.
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
             //SQL query used to insert specified data into the database.
 
-            String SQL = "INSERT INTO miniprojekt.user(first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
+            String SQL = "INSERT INTO miniprojekt.user(firstname, lastname, email, password) VALUES (?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, userDto.getFirstName());
-            preparedStatement.setString(2, userDto.getLastName());
-            preparedStatement.setString(3, userDto.getEmail());
-            preparedStatement.setString(4, userDto.getPassword());
+            preparedStatement.setString(1, userDTO.getFirstName());
+            preparedStatement.setString(2, userDTO.getLastName());
+            preparedStatement.setString(3, userDTO.getEmail());
+            preparedStatement.setString(4, userDTO.getPassword());
 
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -32,7 +32,7 @@ public class WishRepository {
 
             long id = resultSet.getLong(1);
 
-            User user = new User(userDto.getFirstName(), userDto.getLastName(), userDto.getEmail(), userDto.getPassword());
+            User user = new User(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(), userDTO.getPassword());
 
             user.setId(id);
 

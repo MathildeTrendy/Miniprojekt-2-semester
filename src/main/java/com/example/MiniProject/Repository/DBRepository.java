@@ -25,7 +25,7 @@ public class DBRepository implements IRepository {
                 long id = rs.getLong("id");
                 String firstName = rs.getString("first_name");
                 String lastName = rs.getString("last_name");
-                User user = new User(email, password, firstName, lastName);
+                User user = new User(firstName, lastName, email, password);
                 user.setId(id);
                 return user;
             } else {
