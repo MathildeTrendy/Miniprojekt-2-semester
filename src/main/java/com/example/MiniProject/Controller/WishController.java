@@ -77,6 +77,12 @@ public class WishController {
        return "WishListPage";
    }
 
+   @GetMapping("wishListPage")
+   public String welcomeProfile(Model model){
+       model.addAttribute("welcome", "Welcome");
+       return "wishListPage";
+    }
+
     @PostMapping(value = "/createwishlist")
     public String createWishlist(@RequestParam ("email") String email, HttpSession userSession, Model model, @RequestParam ("listName")WishlistFormDTO listName){
         userSession.setAttribute("email", email);
