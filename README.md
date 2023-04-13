@@ -1,29 +1,13 @@
 # Onboarding of New Users
 
-## Welcome and Introduction
 
-In this project, we are developing a digital wish list that allows users to create a digital wish list, share it with others, and reserve items on the wish list. The purpose of this project is to provide a seamless user experience and enhance our web-based database application.
+## onboarding-proces for en bruger:
 
-## Technical Overview
-
-In this project, we are using MySQL Workbench as our tool to manage the database system for the project. This program is integral to our workflow and will be used in the day-to-day tasks of the project.
-
-## Access to Resources
-
-To provide an overview of the project, new users will have access to our web-based application, where they can create an account and access their personal wish list. They will also have access to project-related documentation, such as user guides and tutorials, to familiarize themselves with the features and functionality of the application.
-
-## Meetings and Communication
-
-Regular communication with users will be facilitated through email notifications, in-app messages, and customer support channels. We will also provide a feedback mechanism for users to report any issues or suggestions they may have. This will serve as a central place to coordinate and communicate with users throughout their onboarding process.
- 
-## Project Tasks
-
-We have a dedicated team working on continuously improving the user experience of our web-based application. This includes regular updates and enhancements to the application based on user feedback and requirements. Users can expect a seamless and user-friendly experience while using our application.
-
-## Contact Information
-
-If users have any questions or need assistance during their onboarding process, you can contact our team by GitHub account. Our team is dedicated to providing prompt and helpful support to ensure a smooth onboarding experience for new members.
-
-- <a href="https://github.com/najamoe">Naja Egede Moe (Scrum Master) </a>
-- <a href="https://github.com/MathildeTrendy">Mathilde Trend</a>
-- <a href="https://github.com/sabr5840">Sabrina Ebbesen</a>
+Velkomst og introduktion: Start med at byde den nye bruger velkommen til tjenesten eller applikationen. Indfør dem til det grundlæggende og forklar, hvad de kan forvente af onboarding-processen. Giv også en kort introduktion til tjenestens formål eller applikationens funktioner.
+Kontooprettelse: Hvis brugeren skal oprette en konto, skal du guide dem gennem processen. Dette kan omfatte at angive et brugernavn og adgangskode, indtaste personlige oplysninger, og bekræfte kontoen via e-mail eller telefon.
+Brugervejledning: Tilbyd en omfattende brugervejledning eller en tutorial, der beskriver, hvordan man bruger tjenesten eller applikationen. Dette kan omfatte en oversigt over grænsefladen, beskrivelse af funktionerne, og trin-for-trin instruktioner til at udføre de mest almindelige opgaver.
+Supportressourcer: Giv brugeren oplysninger om, hvordan de kan få hjælp, hvis de støder på problemer eller har spørgsmål. Dette kan inkludere kontaktinformation til kundesupport, en FAQ-sektion, eller et online forum, hvor brugere kan stille spørgsmål og få svar.
+Onboarding-materialer: Udover brugervejledningen kan du også tilbyde andre materialer, der kan hjælpe brugeren med at blive bekendt med tjenesten eller applikationen. Dette kan inkludere videoer, præsentationer, eller interaktive træningsprogrammer.
+Tilpasning: Hvis det er relevant for tjenesten eller applikationen, kan du tilbyde muligheder for brugeren at tilpasse deres oplevelse. Dette kan omfatte indstillinger for sprog, temaer, eller præferencer, der gør det muligt for brugeren at tilpasse tjenesten eller applikationen til deres individuelle behov og præferencer.
+Opfølgning: Følg op med brugeren efter en vis periode for at sikre, at de er i stand til at bruge tjenesten eller applikationen effektivt og besvare eventuelle spørgsmål eller bekymringer, de måtte have.
+Feedback: Opfordr brugeren til at give feedback om deres onboarding-oplevelse. Dette kan hjælpe med at identificere eventuelle forbedringer, der kan foretages i fremtidige onboarding-processer.
