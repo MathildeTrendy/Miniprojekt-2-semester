@@ -3,19 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>WishListFreak</title>
-    <link rel="stylesheet" type="text/css" xmlns:th="http://www.thymeleaf.org">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Web-based application for creating wishlists">
 </head>
-<div class ="header">
-    <div class="header-left">
-        <a href ="frontPage.html">
-            <img src="/imgs/logo.png" alt="Logo" class="logoresponsive"></a>
-    </div>
+<div class="logoheader">
+    <img src="/imgs/logo.png" alt="Logo" class="logoSignupPage">
 </div>
 
 <body>
-<div class ="signuptext-center">
+<div class ="signuptext">
         <h1> Sign up as a wish list freak!</h1>
 </div>
 
@@ -32,4 +28,25 @@
 
 
 </body>
+
+<style>
+    .signuptext{
+        display: flex;
+        justify-content: center;
+    }
+    .logoheader{
+        display: flex;
+        justify-content: center;
+    }
+    .logoSignupPage {
+        width: 60%;
+    }
+
+    .SignUpForm{
+        display: flex;
+        justify-content: center;
+    }
+
+</style>
+
 </html>
