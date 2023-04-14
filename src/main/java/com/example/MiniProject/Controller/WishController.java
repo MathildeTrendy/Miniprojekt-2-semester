@@ -41,7 +41,7 @@ public class WishController {
 
             // if login fails, redirect to index with error message
         } catch (LoginSampleException e) {
-            model.addAttribute("errorMessage", "An error occurred: " + e.getMessage());
+            model.addAttribute("errorMessage", "An error occurred");
             return "frontPage";
         }
     }

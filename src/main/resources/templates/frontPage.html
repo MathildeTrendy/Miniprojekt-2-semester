@@ -24,8 +24,8 @@
     <div>
         <button type="submit">Login</button>
     </div>
-    <div th:if="${LoginFailedMsg}">
-        <p th:text="${LoginFailedMsg}"></p>
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <span th:text="${errorMessage}"></span>
     </div>
 </form>
 <hr>
