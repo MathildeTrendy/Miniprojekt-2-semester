@@ -12,16 +12,24 @@ In this project, we are using GitHub as our version control tool to manage the s
 The app uses a MySql database.
 
 You will be needing two databases
+
 -	One for development
 -	Another for production
+
+
 To simplify the development process we'll skip installing dependencies and instead run them from docker containers. That gives us the benefit that the process is the same wether you're on a Mac, a Windows PC or an online environment and regardless of what IDE you're on. If you are on your own PC (Mac or Windows) simply install and start [Docker Desktop] (https://www.docker.com/products/docker-desktop/).
+
+
 You can manipulate your database in different ways. But in this project, you just have to do it through a database management tool: 
 <details><summary> MySql Workbench connection </summary>
--	username (root)
+  
+- username (root)
 -	password (MathildeSabrina)
 -	database (miniProjekt) 
 -	host (127.0.0.1)
 -	port (3306)
+  
+  
 <details><summary> Below you can copy paste the Database script or you can find it located at: </summary>
 
 https://github.com/MathildeTrendy/Miniprojekt-2-semester/blob/main/DatabaseScript
