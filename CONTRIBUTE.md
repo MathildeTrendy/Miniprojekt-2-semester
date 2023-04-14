@@ -8,6 +8,58 @@ In this project, we are developing a digital wish list that allows customers to 
 
 In this project, we are using GitHub as our version control tool to manage the source code for the project. Additionally, we are also using MySQL Workbench as a tool to manage the database system for the project. Both of these programs are integral to our workflow and will be used in the day-to-day tasks of the project.
 
+## Connect to the database
+The app uses a MySql database.
+
+You will be needing two databases
+-	One for development
+-	Another for production
+To simplify the development process we'll skip installing dependencies and instead run them from docker containers. That gives us the benefit that the process is the same wether you're on a Mac, a Windows PC or an online environment and regardless of what IDE you're on. If you are on your own PC (Mac or Windows) simply install and start [Docker Desktop] (https://www.docker.com/products/docker-desktop/).
+You can manipulate your database in different ways. But in this project, you just have to do it through a database management tool: 
+<details><summary> MySql Workbench connection </summary>
+-	username (root)
+-	password (MathildeSabrina)
+-	database (miniProjekt) 
+-	host (127.0.0.1)
+-	port (3306)
+<details><summary> Below you can copy paste the Database script or you can find it located at: </summary>
+
+https://github.com/MathildeTrendy/Miniprojekt-2-semester/blob/main/DatabaseScript
+  
+```shell
+DROP DATABASE IF EXISTS miniProjekt;
+CREATE DATABASE miniProjekt;
+
+USE miniProjekt;
+
+CREATE TABLE items(
+item_id INT NOT NULL AUTO_INCREMENT,
+itemName varchar(255) NOT NULL,
+itemDescription varchar(255) NOT NULL,
+itemPrice double,
+itemQuantity int,
+itemUrl varchar(255) NOT NULL,
+primary key(item_id)
+);
+
+CREATE TABLE user(
+user_id int NOT NULL AUTO_INCREMENT,
+firstName varchar(255) NOT NULL,
+lastName varchar(255) NOT NULL,
+email varchar(255) NOT NULL,
+password varchar(255) NOT NULL,
+primary key (user_id)
+);
+
+CREATE TABLE wishLists(
+list_id int NOT NULL AUTO_INCREMENT,
+listName varchar(255) NOT NULL,
+listUrl varchar(255) NOT NULL,
+primary key (list_id)
+);
+
+```
+
 ## Access to Resources
 
 To provide an overview of the project, the new team member will have full access to our GitHub repository, where all the source code and project-related documentation are stored. This includes an ER model (conceptual model) of the database design and a class diagram of the program design, which will be updated regularly with changes in the project.
