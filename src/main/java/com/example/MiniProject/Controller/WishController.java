@@ -50,10 +50,10 @@ public class WishController {
     }
     @GetMapping("signupsucces")
     public String signUpSucces(){
-        return "redirect:/signUpSucces";
+        return "redirect:/signupsucces";
     }
     @PostMapping(value = "/login")
-    public String logIn(@RequestParam ("email") String email, @RequestParam("password") String password, HttpSession userSession, Model model, @ModelAttribute UserFormDTO userFormDTO) {
+    public String login(@RequestParam ("email") String email, @RequestParam("password") String password, HttpSession userSession, Model model, @ModelAttribute(name="loginform") UserFormDTO userFormDTO) {
         userSession.setAttribute("email", email);
         userSession.getAttribute("email");
       if(email.length() >0){
