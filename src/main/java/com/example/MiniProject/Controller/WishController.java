@@ -55,7 +55,7 @@ public class WishController {
         userSession.setAttribute("email", email);
         userSession.getAttribute("email");
       if(email.length() >0){
-            return "redirect:/wishlistpage";
+            return "redirect:/myprofile";
         } else {
             model.addAttribute("LoginFailedMsg", "login error");
             return "redirect:/login";
