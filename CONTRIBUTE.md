@@ -19,7 +19,7 @@ You will be needing two databases
 
 To simplify the development process we'll skip installing dependencies and instead run them from docker containers. That gives us the benefit that the process is the same wether you're on a Mac, a Windows PC or an online environment and regardless of what IDE you're on. 
 
-If you are on your own PC (Mac or Windows) simply install and start [Docker Desktop] (https://llk.dk/74f3of).
+If you are on your own PC (Mac or Windows) simply install and start install and start [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
 You can manipulate your database in different ways. But in this project, you just have to do it through a database management tool: 
 
@@ -50,11 +50,6 @@ itemUrl varchar(255) NOT NULL,
 primary key(item_id)
 );
 
-INSERT INTO items(item_id, itemName, itemDescription, itemPrice, itemQuantity, itemUrl)
-VALUES
-(1, "Nike Shorts", "Lårkorte shorts", 250, 1, "www.nikeshorts.dk");
-
-
 CREATE TABLE user(
 user_id int NOT NULL AUTO_INCREMENT,
 firstName varchar(255) NOT NULL,
@@ -64,10 +59,6 @@ password varchar(255) NOT NULL,
 primary key (user_id)
 );
 
-INSERT INTO user(user_id, firstName, lastName, email, password)
-values
-(11, "Louise", "Ingerslev", "Lulu@gmail.com", "1234");
-
 CREATE TABLE wishLists(
 list_id int NOT NULL AUTO_INCREMENT,
 listName varchar(255) NOT NULL,
@@ -75,9 +66,6 @@ listUrl varchar(255) NOT NULL,
 primary key (list_id)
 );
 
-INSERT INTO wishLists(list_id, listName, listUrl)
-values
-(11, "Fødselsdagsliste", "www.listeføds.com");
 ```
 
 ## Access to Resources
