@@ -17,12 +17,14 @@ You will be needing two databases
 -	Another for production
 
 
-To simplify the development process we'll skip installing dependencies and instead run them from docker containers. That gives us the benefit that the process is the same wether you're on a Mac, a Windows PC or an online environment and regardless of what IDE you're on. If you are on your own PC (Mac or Windows) simply install and start [Docker Desktop] (https://www.docker.com/products/docker-desktop/).
+To simplify the development process we'll skip installing dependencies and instead run them from docker containers. That gives us the benefit that the process is the same wether you're on a Mac, a Windows PC or an online environment and regardless of what IDE you're on. 
 
+If you are on your own PC (Mac or Windows) simply install and start install and start [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
 You can manipulate your database in different ways. But in this project, you just have to do it through a database management tool: 
-<details><summary> MySql Workbench connection </summary>
-  
+
+MySql Workbench conncetion
+ 
 - username (root)
 -	password (MathildeSabrina)
 -	database (miniProjekt) 
@@ -30,11 +32,9 @@ You can manipulate your database in different ways. But in this project, you jus
 -	port (3306)
   
   
-<details><summary> Below you can copy paste the Database script or you can find it located at: </summary>
-
-https://github.com/MathildeTrendy/Miniprojekt-2-semester/blob/main/DatabaseScript
+Below you can copy paste the Database script or you can find it located at: https://llk.dk/cjjmth
   
-```shell
+```
 DROP DATABASE IF EXISTS miniProjekt;
 CREATE DATABASE miniProjekt;
 
@@ -69,7 +69,7 @@ primary key (list_id)
 ```
 
 ## Access to Resources
-
+  
 To provide an overview of the project, the new team member will have full access to our GitHub repository, where all the source code and project-related documentation are stored. This includes an ER model (conceptual model) of the database design and a class diagram of the program design, which will be updated regularly with changes in the project.
 
 ## Meetings and Communication
