@@ -19,7 +19,22 @@
 </div>
 
 </body>
-
+<form th:action="@{/}" method="post">
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+  </div>
+  <div>
+    <button type="submit">Login</button>
+  </div>
+  <div th:if="${LoginFailedMsg}">
+    <p th:text="${LoginFailedMsg}"></p>
+  </div>
+</form>
 <style>
   .logoheader{
     display: flex;

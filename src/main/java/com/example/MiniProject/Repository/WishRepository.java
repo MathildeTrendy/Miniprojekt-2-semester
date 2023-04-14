@@ -58,38 +58,33 @@ public class WishRepository {
     }
 
     // Method to verify a user by their email adress
-    public User verifyAccount(String email, String password) throws LoginSampleException, SQLException {
+    public User verifyUser(String email, String password) throws LoginSampleException {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde");
 
-        try (Connection connection = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)) {
+            // Prepare a SQL statement to retrieve the user with the given email and password
+            String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, email);
+            statement.setString(2, password);
 
-            //SQL query used to insert specified data into the database.
-            String SQL = "SELECT * FROM user WHERE email = ? AND password = ?";
-
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-
-            preparedStatement.setString(1, email);
-            preparedStatement.setString(2, password);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
+            ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                long id = resultSet.getLong("id");
-                String firtName = resultSet.getString("firstname");
-                String lastName = resultSet.getString("lastname");
-
-                User user = new User(email, password, firtName, lastName);
-
-                user.setId(id);
-
+                // User with the given email and password found, create a User object and return it
+                User user = new User();
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
+                user.setFirstName(resultSet.getString("firstname"));
+                user.setLastName(resultSet.getString("lastname"));
                 return user;
             } else {
                 throw new LoginSampleException("Could not validate user");
             }
-        }catch (SQLException e){
-            throw new LoginSampleException(e.getMessage());
+        } catch (SQLException e) {
+            // Handle the exception
+            throw new RuntimeException("Error verifying user", e);
         }
     }
-
 
     // Method to create a new wishlist in the database
     public int createWishList(WishlistFormDTO wishlistFormDTO) {
