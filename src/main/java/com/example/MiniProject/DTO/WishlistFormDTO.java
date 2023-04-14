@@ -1,4 +1,4 @@
-package DTO;
+package com.example.MiniProject.DTO;
 
 public class WishlistFormDTO {
 

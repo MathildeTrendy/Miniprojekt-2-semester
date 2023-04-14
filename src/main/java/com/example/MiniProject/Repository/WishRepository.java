@@ -1,17 +1,15 @@
 package com.example.MiniProject.Repository;
 
-import DTO.ItemFormDTO;
-import DTO.UserFormDTO;
-import DTO.WishlistFormDTO;
+import com.example.MiniProject.DTO.ItemFormDTO;
+import com.example.MiniProject.DTO.UserFormDTO;
+import com.example.MiniProject.DTO.WishlistFormDTO;
 import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Utility.LoginSampleException;
-import com.example.MiniProject.Utility.ManagerDb;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 @Repository
 public class WishRepository {

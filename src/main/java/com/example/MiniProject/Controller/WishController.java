@@ -1,10 +1,9 @@
 package com.example.MiniProject.Controller;
 
-import DTO.UserFormDTO;
-import DTO.WishlistFormDTO;
+import com.example.MiniProject.DTO.UserFormDTO;
+import com.example.MiniProject.DTO.WishlistFormDTO;
 import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Model.WishLists;
-import com.example.MiniProject.Repository.DbRepository;
 import com.example.MiniProject.Repository.WishRepository;
 
 import com.example.MiniProject.Utility.LoginSampleException;
