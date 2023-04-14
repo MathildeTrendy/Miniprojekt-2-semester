@@ -1,5 +1,6 @@
 package com.example.MiniProject.Controller;
 
+import DTO.ItemFormDTO;
 import DTO.UserFormDTO;
 import DTO.WishlistFormDTO;
 import com.example.MiniProject.Model.User;
@@ -25,7 +26,7 @@ public class WishController {
     }
 
     @GetMapping({"/", ""})
-    public String index(){
+    public String index() {
         return "frontPage";
     }
 
@@ -39,28 +40,31 @@ public class WishController {
     @PostMapping("/signup")
     public String createUser(HttpServletRequest request, @ModelAttribute UserFormDTO userFormDTO) throws LoginSampleException {
         User user = wishRepository.createUser(userFormDTO);
-        if (user != null){
+        if (user != null) {
             request.getSession().setAttribute("email", user.getEmail());
             return "redirect:/signupsucces";
         } else {
             return "signupfail";
         }
     }
+
     @GetMapping("signupsucces")
-    public String signUpSucces(){
+    public String signUpSucces() {
         return "signupsucces";
     }
+
     @PostMapping(value = "/login")
-    public String login(@RequestParam ("email") String email, @RequestParam("password") String password, HttpSession userSession, Model model, @ModelAttribute(name="loginform") UserFormDTO userFormDTO) {
+    public String login(@RequestParam("email") String email, @RequestParam("password") String password, HttpSession userSession, Model model, @ModelAttribute(name = "loginform") UserFormDTO userFormDTO) {
         userSession.setAttribute("email", email);
         userSession.getAttribute("email");
-      if(email.length() >0){
+        if (email.length() > 0) {
             return "redirect:/myprofile";
         } else {
             model.addAttribute("LoginFailedMsg", "login error");
             return "redirect:/login";
         }
     }
+
     @GetMapping("/login")
     public String Login() {
         return "login";
@@ -72,17 +76,17 @@ public class WishController {
     }
 **/
 
-   @GetMapping("/myprofile")
-   public String welcomeProfile(Model model){
-       model.addAttribute("welcome", "Welcome");
-       return "myprofile";
+    @GetMapping("/myprofile")
+    public String welcomeProfile(Model model) {
+        model.addAttribute("welcome", "Welcome");
+        return "myprofile";
     }
 
     @PostMapping(value = "/myprofile")
-    public String createWishlist(@RequestParam ("email") String email, HttpSession userSession, Model model, @RequestParam ("listName")WishlistFormDTO listName){
+    public String createWishlist(@RequestParam("email") String email, HttpSession userSession, Model model, @RequestParam("listName") WishlistFormDTO listName) {
         userSession.setAttribute("email", email);
         userSession.getAttribute("email");
-        if (email.length() > 0 ) {
+        if (email.length() > 0) {
             wishRepository.createWishList(listName);
         }
         return "redirect:/myprofile";
@@ -98,7 +102,19 @@ public class WishController {
     public int deleteWishlist(@PathVariable("id") int id, @RequestBody WishLists wishLists) {
         return wishRepository.deleteWishlist(id, wishLists);
     }
-
+/*
+    @PostMapping(value = "/myprofile/{listName}")
+    public String createWish(@RequestParam("email") String email, HttpSession userSession, Model model, @RequestParam("itemName") ItemFormDTO itemName, @RequestParam("listName") WishlistFormDTO listName) throws SQLException {
+        userSession.setAttribute("email", email);
+        userSession.getAttribute("email");
+        if (email.length() > 0) {
+            wishRepository.createWish(itemName);
+            return "redirect:/" + listName;
+        } else {
+            model.addAttribute("Failed to create item", "");
+            return "redirect:/myprofile";
+        }
+*/
 
 /*
     @PostMapping("/editWishlist/{id}")
@@ -136,13 +152,7 @@ public class WishController {
         // Returner en bekræftelsesbesked eller en redirect til en relevant side
         return "Wish list deleted";
     }
-
-
-
  */
-
-
-}
-
+    }
 
 

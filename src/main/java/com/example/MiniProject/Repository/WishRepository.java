@@ -1,5 +1,6 @@
 package com.example.MiniProject.Repository;
 
+import DTO.ItemFormDTO;
 import DTO.UserFormDTO;
 import DTO.WishlistFormDTO;
 import com.example.MiniProject.Model.User;
@@ -178,7 +179,29 @@ public class WishRepository {
         }
     }
 
+    public int createWish (ItemFormDTO itemFormDTO) throws SQLException {
+        try(Connection connection = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)){
 
+            String SQL = "INSERT INTO items " + "(name_of_item, description_of_item, price, quantity, url)" +
+                    "VALUES (\""+ itemFormDTO.getItemName()+"\",\""+ itemFormDTO.getItemDescription()+"\",\""+
+                    itemFormDTO.getItemPrice()+"\",\""+ itemFormDTO.getItemQuantity()+"\",\""+ itemFormDTO.getItemUrl()+"\",\""+"\")";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.execute();
+
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+            int generatedKey = 0;
+
+            if (resultSet.next()) {
+                generatedKey = resultSet.getInt(1);
+            }
+
+            return generatedKey;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 
