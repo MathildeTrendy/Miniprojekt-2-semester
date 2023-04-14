@@ -71,34 +71,27 @@ public class WishController {
         return "createWishlist";
     }
 **/
-   @GetMapping("/createwishlist")
-   public String createWishlist() {
-       return "myprofile";
-   }
 
-   @GetMapping("wishListPage")
+   @GetMapping("/myprofile")
    public String welcomeProfile(Model model){
        model.addAttribute("welcome", "Welcome");
-       return "wishListPage";
+       return "myprofile";
     }
 
-    @PostMapping(value = "/createwishlist")
+    @PostMapping(value = "/myprofile")
     public String createWishlist(@RequestParam ("email") String email, HttpSession userSession, Model model, @RequestParam ("listName")WishlistFormDTO listName){
         userSession.setAttribute("email", email);
         userSession.getAttribute("email");
         if (email.length() > 0 ) {
             wishRepository.createWishList(listName);
-            return "redirect:/WishListPage";
-        } else
-            { model.addAttribute("Failed to create list", "");
-                return "redirect:/createwishlist";
-            }
+        }
+        return "redirect:/myprofile";
     }
 
     @PostMapping("/editWishlist/{id}")
     public String editWishlist(@RequestParam("id") int id, @RequestBody WishLists wishLists) throws SQLException {
         wishRepository.editWishlist(id, wishLists);
-        return "redirect:/WishListPage";
+        return "redirect:/myprofile";
     }
 
     @PostMapping("/deleteWishlist/{id}")
