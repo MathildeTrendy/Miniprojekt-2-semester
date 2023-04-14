@@ -96,6 +96,19 @@ public class WishController {
                 return "redirect:/createwishlist";
             }
     }
+
+    @PostMapping("/editWishlist/{id}")
+    public String editWishlist(@RequestParam("id") int id, @RequestBody WishLists wishLists) throws SQLException {
+        wishRepository.editWishlist(id, wishLists);
+        return "redirect:/WishListPage";
+    }
+
+    @PostMapping("/deleteWishlist/{id}")
+    public int deleteWishlist(@PathVariable("id") int id, @RequestBody WishLists wishLists) {
+        return wishRepository.deleteWishlist(id, wishLists);
+    }
+
+
 /*
     @PostMapping("/editWishlist/{id}")
     public ResponseEntity<String> editWishlist(@PathVariable("id") int id, @RequestBody WishLists wishLists) {
