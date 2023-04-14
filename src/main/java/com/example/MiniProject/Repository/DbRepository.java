@@ -35,4 +35,35 @@ public class DbRepository implements IRepository{
             throw new LoginSampleException(ex.getMessage());
         }
     }
+    public int editWishlist(int id, WishLists wishLists) throws SQLException {
+        try (Connection connection = DriverManager.getConnection(dbUserurl, dbUsername, dbUserpassword)) {
+
+            //SQL query used to insert specified data into the database.
+            String SQL = "UPDATE wish_list set" + " Name = \""+ wishLists.getWishlistName() + "\" WHERE wishlist_id = \""+ id +"\"";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.execute();
+
+            return preparedStatement.getUpdateCount();
+
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public int deleteWishlist(int id, WishLists wishLists) {
+        try (Connection connection = DriverManager.getConnection(dbUserurl, dbUsername, dbUserpassword)) {
+
+            String SQL = "DELETE FROM wish_list" + "Name = \""+ wishLists.getWishlistName() + "\" WHERE wishlist_id = \""+ id +"\"";;
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.execute();
+
+            return preparedStatement.getUpdateCount();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
