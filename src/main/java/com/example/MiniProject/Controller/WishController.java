@@ -4,13 +4,11 @@ import DTO.UserFormDTO;
 import DTO.WishlistFormDTO;
 import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Model.WishLists;
-import com.example.MiniProject.Repository.DbRepository;
 import com.example.MiniProject.Repository.WishRepository;
 
 import com.example.MiniProject.Utility.LoginSampleException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.apache.juli.logging.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -57,7 +55,7 @@ public class WishController {
         userSession.setAttribute("email", email);
         userSession.getAttribute("email");
       if(email.length() >0){
-            return "redirect:/WishListPage";
+            return "redirect:/wishlistpage";
         } else {
             model.addAttribute("LoginFailedMsg", "login error");
             return "redirect:/login";
@@ -75,7 +73,7 @@ public class WishController {
 **/
    @GetMapping("/createwishlist")
    public String createWishlist() {
-       return "WishListPage";
+       return "wishlistpage";
    }
 
    @GetMapping("wishListPage")
