@@ -4,6 +4,7 @@ import DTO.UserFormDTO;
 import DTO.WishlistFormDTO;
 import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Model.WishLists;
+import com.example.MiniProject.Repository.DbRepository;
 import com.example.MiniProject.Repository.WishRepository;
 
 import com.example.MiniProject.Utility.LoginSampleException;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+
 @Controller
 public class WishController {
 
@@ -24,9 +26,24 @@ public class WishController {
         this.wishRepository = wishRepository;
     }
 
-    @GetMapping({"/", ""})
-    public String index(){
+    @GetMapping("/")
+    public String index() {
         return "frontPage";
+    }
+    @PostMapping({"/",""})
+    public String index(HttpServletRequest request, @ModelAttribute UserFormDTO userformDTO, Model model) {
+        // Trying to login
+        try {
+            User user = wishRepository.verifyUser(userformDTO.getEmail(), userformDTO.getPassword());
+
+            request.getSession().setAttribute("email", user.getEmail());
+            return "redirect:/myprofile";
+
+            // if login fails, redirect to index with error message
+        } catch (LoginSampleException e) {
+            model.addAttribute("errorMessage", "An error occurred: " + e.getMessage());
+            return "frontPage";
+        }
     }
 
     @GetMapping("/signup")
@@ -39,32 +56,19 @@ public class WishController {
     @PostMapping("/signup")
     public String createUser(HttpServletRequest request, @ModelAttribute UserFormDTO userFormDTO) throws LoginSampleException {
         User user = wishRepository.createUser(userFormDTO);
-        if (user != null){
+        if (user != null) {
             request.getSession().setAttribute("email", user.getEmail());
             return "redirect:/signupsucces";
         } else {
             return "signupfail";
         }
     }
+
     @GetMapping("signupsucces")
-    public String signUpSucces(){
+    public String signUpSucces() {
         return "signupsucces";
     }
-    @PostMapping(value = "/login")
-    public String login(@RequestParam ("email") String email, @RequestParam("password") String password, HttpSession userSession, Model model, @ModelAttribute(name="loginform") UserFormDTO userFormDTO) {
-        userSession.setAttribute("email", email);
-        userSession.getAttribute("email");
-      if(email.length() >0){
-            return "redirect:/myprofile";
-        } else {
-            model.addAttribute("LoginFailedMsg", "login error");
-            return "redirect:/login";
-        }
-    }
-    @GetMapping("/login")
-    public String Login() {
-        return "login";
-    }
+
 
    /* @GetMapping("/createWishlist")
     public String createWishlist(@RequestParam ("listName") String listName) {
@@ -72,17 +76,17 @@ public class WishController {
     }
 **/
 
-   @GetMapping("/myprofile")
-   public String welcomeProfile(Model model){
-       model.addAttribute("welcome", "Welcome");
-       return "myprofile";
+    @GetMapping("/myprofile")
+    public String welcomeProfile(Model model) {
+        model.addAttribute("welcome", "Welcome");
+        return "myprofile";
     }
 
     @PostMapping(value = "/myprofile")
-    public String createWishlist(@RequestParam ("email") String email, HttpSession userSession, Model model, @RequestParam ("listName")WishlistFormDTO listName){
+    public String createWishlist(@RequestParam("email") String email, HttpSession userSession, Model model, @RequestParam("listName") WishlistFormDTO listName) {
         userSession.setAttribute("email", email);
         userSession.getAttribute("email");
-        if (email.length() > 0 ) {
+        if (email.length() > 0) {
             wishRepository.createWishList(listName);
         }
         return "redirect:/myprofile";

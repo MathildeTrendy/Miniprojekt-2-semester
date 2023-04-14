@@ -24,11 +24,11 @@ package com.example.MiniProject.Model;
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+        public void setFirstName(String firstName) {
+            this.firstName = firstName;
+        }
 
-    public String getLastName() {
+        public String getLastName() {
         return lastName;
     }
 
@@ -54,4 +54,6 @@ package com.example.MiniProject.Model;
 
         public void setId(long id) {
         }
+
+
     }
