@@ -41,14 +41,14 @@ public class WishController {
         User user = wishRepository.createUser(userFormDTO);
         if (user != null){
             request.getSession().setAttribute("email", user.getEmail());
-            return "signupsucces";
+            return "redirect:/signupsucces";
         } else {
-            return "redirect:/signupfail";
+            return "signupfail";
         }
     }
     @GetMapping("signupsucces")
     public String signUpSucces(){
-        return "redirect:/signupsucces";
+        return "signupsucces";
     }
     @PostMapping(value = "/login")
     public String login(@RequestParam ("email") String email, @RequestParam("password") String password, HttpSession userSession, Model model, @ModelAttribute(name="loginform") UserFormDTO userFormDTO) {

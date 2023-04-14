@@ -26,7 +26,7 @@ public class WishRepository {
 
     public User createUser(UserFormDTO userDTO) throws LoginSampleException {
         //Creates a database connection in Java by specifying the URL, username, and password.
-        try (Connection connection = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
             //SQL query used to insert specified data into the database.
 
             String SQL = "INSERT INTO miniprojekt.user(firstname, lastname, email, password) VALUES (?, ?, ?, ?)";
