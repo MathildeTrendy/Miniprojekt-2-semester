@@ -4,11 +4,13 @@ import DTO.UserFormDTO;
 import DTO.WishlistFormDTO;
 import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Model.WishLists;
+import com.example.MiniProject.Repository.DbRepository;
 import com.example.MiniProject.Repository.WishRepository;
 
 import com.example.MiniProject.Utility.LoginSampleException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.apache.juli.logging.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -52,18 +54,18 @@ public class WishController {
     public String signUpSucces(){
         return "redirect:/signUpSucces";
     }
-    @PostMapping(value = "/login")
-    public String logIn(@RequestParam("email") String email, @RequestParam ("password")String password, Model model, HttpSession userSession) throws LoginSampleException, SQLException {
+   /* @PostMapping(value = "/login")
+    public String logIn(@RequestParam ("email") String email, @RequestParam("password") String password, HttpSession userSession, Model model, @ModelAttribute UserFormDTO userFormDTO) {
         userSession.setAttribute("email", email);
         userSession.getAttribute("email");
-        if (email.length() > 0) {
-            wishRepository.verifyAccount(email, password);
+        try {
+            User user = DbRepository.login(userFormDTO.getEmail(), userFormDTO.getPassword());
             return "redirect:/WishListPage";
-        } else
-        { model.addAttribute("LoginFailed", ""); // tilføjer en fejlbesked til modellen, som vises på login-siden, hvis brugeren ikke kan logge ind.
+        } catch (LoginSampleException e) {
+            model.addAttribute("LoginFailedMsg", "login error");
             return "redirect:/login";
         }
-    }
+    }*/
     @GetMapping("/login")
     public String Login() {
         return "login";

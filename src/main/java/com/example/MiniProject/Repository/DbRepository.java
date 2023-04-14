@@ -1,18 +1,18 @@
 package com.example.MiniProject.Repository;
-import com.example.MiniProject.Utility.ManagerDb;
-import com.example.MiniProject.Utility.LoginSampleException;
+
 import com.example.MiniProject.Model.User;
+import com.example.MiniProject.Utility.LoginSampleException;
+import com.example.MiniProject.Utility.ManagerDb;
 import org.springframework.stereotype.Repository;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Repository
+public class DbRepository implements IRepository{
 
-
-@Repository("wishlistDb")
-public class DBRepository implements IRepository {
-    @Override
     public User login(String email, String password) throws LoginSampleException {
         try {
             Connection con = ManagerDb.getConnection();
@@ -36,4 +36,3 @@ public class DBRepository implements IRepository {
         }
     }
 }
-    

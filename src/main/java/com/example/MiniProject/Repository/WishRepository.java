@@ -5,12 +5,15 @@ import DTO.WishlistFormDTO;
 import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Utility.LoginSampleException;
+import com.example.MiniProject.Utility.ManagerDb;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 
 @Repository
 public class WishRepository {
+
+
 
     public User createUser(UserFormDTO userDTO) throws LoginSampleException {
         //Creates a database connection in Java by specifying the URL, username, and password.
