@@ -70,8 +70,8 @@ public class WishController {
     }
 
 
-   /* @GetMapping("/createWishlist")
-    public String createWishlist(@RequestParam ("listName") String listName) {
+   /* @GetMapping("/wishlistOverview")
+    public String showAllWishlists(@RequestParam ("listName") String listName) {
         return "createWishlist";
     }
 **/
@@ -82,7 +82,9 @@ public class WishController {
         return "myprofile";
     }
 
-    @PostMapping(value = "/myprofile")
+
+
+    @PostMapping(value = "/myprofile{listName}")
     public String createWishlist(@RequestParam("email") String email, HttpSession userSession, Model model, @RequestParam("listName") WishlistFormDTO listName) {
         userSession.setAttribute("email", email);
         userSession.getAttribute("email");
@@ -91,6 +93,7 @@ public class WishController {
         }
         return "redirect:/myprofile";
     }
+
 
     @PostMapping("/editWishlist/{id}")
     public String editWishlist(@RequestParam("id") int id, @RequestBody WishLists wishLists) throws SQLException {

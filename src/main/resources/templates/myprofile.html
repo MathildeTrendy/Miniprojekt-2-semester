@@ -53,6 +53,16 @@
     closeModalBtn.addEventListener("click", closeModal);
 
     overlay.addEventListener("click", closeModal);
+
+    const addWishlist = function () {
+        const wishlistName = document.getElementById("email").value;
+        // Send wishlistName to server using an HTTP request, e.g., fetch() or XMLHttpRequest
+        // After successful response, navigate to wishlistOverview page
+        window.location.href = "/wishlistOverview";
+    };
+
+    const addWishlistBtn = document.querySelector(".modal .btn");
+    addWishlistBtn.addEventListener("click", addWishlist);
 </script>
 
 </body>
@@ -159,7 +169,5 @@
     }
 
 </style>
-
-
-
 </html>
+
