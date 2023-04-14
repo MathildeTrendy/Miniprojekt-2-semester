@@ -28,7 +28,6 @@ public class WishController {
 
     @GetMapping({"/", ""})
     public String index(){
-
         return "frontPage";
     }
 
@@ -41,7 +40,6 @@ public class WishController {
 
     @PostMapping("/signup")
     public String createUser(HttpServletRequest request, @ModelAttribute UserFormDTO userFormDTO) throws LoginSampleException {
-        System.out.println("test");
         User user = wishRepository.createUser(userFormDTO);
         if (user != null){
             request.getSession().setAttribute("email", user.getEmail());
@@ -54,18 +52,17 @@ public class WishController {
     public String signUpSucces(){
         return "redirect:/signUpSucces";
     }
-   /* @PostMapping(value = "/login")
+    @PostMapping(value = "/login")
     public String logIn(@RequestParam ("email") String email, @RequestParam("password") String password, HttpSession userSession, Model model, @ModelAttribute UserFormDTO userFormDTO) {
         userSession.setAttribute("email", email);
         userSession.getAttribute("email");
-        try {
-            User user = DbRepository.login(userFormDTO.getEmail(), userFormDTO.getPassword());
+      if(email.length() >0){
             return "redirect:/WishListPage";
-        } catch (LoginSampleException e) {
+        } else {
             model.addAttribute("LoginFailedMsg", "login error");
             return "redirect:/login";
         }
-    }*/
+    }
     @GetMapping("/login")
     public String Login() {
         return "login";
@@ -75,7 +72,6 @@ public class WishController {
     public String createWishlist(@RequestParam ("listName") String listName) {
         return "createWishlist";
     }
-
 **/
    @GetMapping("/createwishlist")
    public String createWishlist() {

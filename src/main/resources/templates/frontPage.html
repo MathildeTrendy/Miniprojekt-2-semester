@@ -11,9 +11,12 @@
 </div>
 
 <body>
-<div class="loginbutton">
-<a href="login.html">Login</a>
-</div>
+<form id = "LoginButton" th:action = "@{/login}"  method="post">
+        <input type="button" value="Login" class="btn btn-red" />
+    </div>
+</form>
+
+
 <br>
 <div class="signupbutton">
 <a href="signUp.html">sign up</a>
