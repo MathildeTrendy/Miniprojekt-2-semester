@@ -14,6 +14,19 @@
 </div>
 
 <body>
+<form th:action="@{/login}" method="post">
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" th:field="${loginform.email}" />
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" th:field="${loginform.password}" />
+    </div>
+    <div>
+        <button type="submit">Login</button>
+    </div>
+</form>
 </body>
 
 <style>
