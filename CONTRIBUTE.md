@@ -17,12 +17,14 @@ You will be needing two databases
 -	Another for production
 
 
-To simplify the development process we'll skip installing dependencies and instead run them from docker containers. That gives us the benefit that the process is the same wether you're on a Mac, a Windows PC or an online environment and regardless of what IDE you're on. If you are on your own PC (Mac or Windows) simply install and start [Docker Desktop] (https://www.docker.com/products/docker-desktop/).
+To simplify the development process we'll skip installing dependencies and instead run them from docker containers. That gives us the benefit that the process is the same wether you're on a Mac, a Windows PC or an online environment and regardless of what IDE you're on. 
 
+If you are on your own PC (Mac or Windows) simply install and start [Docker Desktop] (https://llk.dk/74f3of).
 
 You can manipulate your database in different ways. But in this project, you just have to do it through a database management tool: 
-<details><summary> MySql Workbench connection </summary>
-  
+
+MySql Workbench conncetion
+ 
 - username (root)
 -	password (MathildeSabrina)
 -	database (miniProjekt) 
@@ -30,11 +32,10 @@ You can manipulate your database in different ways. But in this project, you jus
 -	port (3306)
   
   
-<details><summary> Below you can copy paste the Database script or you can find it located at: </summary>
-
+Below you can copy paste the Database script or you can find it located at
 https://github.com/MathildeTrendy/Miniprojekt-2-semester/blob/main/DatabaseScript
   
-```shell
+```
 DROP DATABASE IF EXISTS miniProjekt;
 CREATE DATABASE miniProjekt;
 
@@ -50,6 +51,11 @@ itemUrl varchar(255) NOT NULL,
 primary key(item_id)
 );
 
+INSERT INTO items(item_id, itemName, itemDescription, itemPrice, itemQuantity, itemUrl)
+VALUES
+(1, "Nike Shorts", "Lårkorte shorts", 250, 1, "www.nikeshorts.dk");
+
+
 CREATE TABLE user(
 user_id int NOT NULL AUTO_INCREMENT,
 firstName varchar(255) NOT NULL,
@@ -59,6 +65,10 @@ password varchar(255) NOT NULL,
 primary key (user_id)
 );
 
+INSERT INTO user(user_id, firstName, lastName, email, password)
+values
+(11, "Louise", "Ingerslev", "Lulu@gmail.com", "1234");
+
 CREATE TABLE wishLists(
 list_id int NOT NULL AUTO_INCREMENT,
 listName varchar(255) NOT NULL,
@@ -66,10 +76,13 @@ listUrl varchar(255) NOT NULL,
 primary key (list_id)
 );
 
+INSERT INTO wishLists(list_id, listName, listUrl)
+values
+(11, "Fødselsdagsliste", "www.listeføds.com");
 ```
 
 ## Access to Resources
-
+  
 To provide an overview of the project, the new team member will have full access to our GitHub repository, where all the source code and project-related documentation are stored. This includes an ER model (conceptual model) of the database design and a class diagram of the program design, which will be updated regularly with changes in the project.
 
 ## Meetings and Communication
