@@ -32,8 +32,7 @@ MySql Workbench conncetion
 -	port (3306)
   
   
-Below you can copy paste the Database script or you can find it located at
-https://github.com/MathildeTrendy/Miniprojekt-2-semester/blob/main/DatabaseScript
+Below you can copy paste the Database script or you can find it located at: https://llk.dk/cjjmth
   
 ```
 DROP DATABASE IF EXISTS miniProjekt;
