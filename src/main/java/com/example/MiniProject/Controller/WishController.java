@@ -73,7 +73,7 @@ public class WishController {
 **/
    @GetMapping("/createwishlist")
    public String createWishlist() {
-       return "wishlistpage";
+       return "myprofile";
    }
 
    @GetMapping("wishListPage")
