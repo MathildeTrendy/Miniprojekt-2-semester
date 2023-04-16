@@ -24,4 +24,8 @@ You can contact Wishlist freaks customer support directly through GitHub. The cu
 
 We highly appreciate your feedback! We encourage you to provide feedback on your onboarding experience with Wishlist freaks. Your feedback is valuable to us as it can help us identify any areas where we can improve our onboarding process and make it even better for future users.
 
+- <a href="https://github.com/najamoe">Naja Egede Moe </a>
+- <a href="https://github.com/MathildeTrendy">Mathilde Trend</a>
+- <a href="https://github.com/sabr5840">Sabrina Ebbesen</a>
+
 
