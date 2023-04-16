@@ -19,10 +19,7 @@ Wishlist freaks is the ideal platform to help you keep track of your wishes and 
 -	Log in to your account and start using Wishlist freaks.
 -	If you encounter any issues or have questions regarding Wishlist freaks, there are several ways you can seek help:
 
-## Brugervejledning
-Tilbyd en omfattende brugervejledning eller en tutorial, der beskriver, hvordan man bruger tjenesten eller applikationen. Dette kan omfatte en oversigt over grænsefladen, beskrivelse af funktionerne, og trin-for-trin instruktioner til at udføre de mest almindelige opgaver.
-
-##Feedback
+## Feedback
 You can contact Wishlist freaks customer support directly through GitHub. The customer support team will be able to answer your questions, assist with technical issues, or provide guidance on how to use the service.
 
 We highly appreciate your feedback! We encourage you to provide feedback on your onboarding experience with Wishlist freaks. Your feedback is valuable to us as it can help us identify any areas where we can improve our onboarding process and make it even better for future users.
