@@ -1,25 +1,30 @@
 # Onboarding of New Users
 
-## Velkomst og introduktion
-Start med at byde den nye bruger velkommen til tjenesten eller applikationen. Indfør dem til det grundlæggende og forklar, hvad de kan forvente af onboarding-processen. Giv også en kort introduktion til tjenestens formål eller applikationens funktioner.
+## Welcome and introduction
+Welcome to Wishlist freaks - your ultimate web app to make your wishes come true! Wishlist freaks is designed to help you organize, share, and realize your wishes and dreams.
 
-## Kontooprettelse
-Hvis brugeren skal oprette en konto, skal du guide dem gennem processen. Dette kan omfatte at angive et brugernavn og adgangskode, indtaste personlige oplysninger, og bekræfte kontoen via e-mail eller telefon.
+The purpose of Wishlist freaks is to provide you with a central place where you can create and manage your wishes in an easy and structured way. Wishlist freaks assists you in keeping track of your wishes and turning them into reality.
+
+The features of the application include:
+
+Wish creation: You can easily create your wishes by adding titles and descriptions to make them more structured and organized.
+Wishlist freaks is the ideal platform to help you keep track of your wishes and turn them into reality in a fun and structured manner. Welcome to Wishlist freaks - where your dreams come true!
+
+## Account creation
+
+-	Visit the Wishlist freaks website.
+-	Click on "Sign up".
+-	Fill in your name, email address, and password.
+-	Click on "Sign up" to complete the process.
+-	Log in to your account and start using Wishlist freaks.
+-	If you encounter any issues or have questions regarding Wishlist freaks, there are several ways you can seek help:
 
 ## Brugervejledning
 Tilbyd en omfattende brugervejledning eller en tutorial, der beskriver, hvordan man bruger tjenesten eller applikationen. Dette kan omfatte en oversigt over grænsefladen, beskrivelse af funktionerne, og trin-for-trin instruktioner til at udføre de mest almindelige opgaver.
 
-## Supportressourcer
-Giv brugeren oplysninger om, hvordan de kan få hjælp, hvis de støder på problemer eller har spørgsmål. Dette kan inkludere kontaktinformation til kundesupport, en FAQ-sektion, eller et online forum, hvor brugere kan stille spørgsmål og få svar.
-
-## Onboarding-materialer
-Udover brugervejledningen kan du også tilbyde andre materialer, der kan hjælpe brugeren med at blive bekendt med tjenesten eller applikationen. Dette kan inkludere videoer, præsentationer, eller interaktive træningsprogrammer.
-
-## Tilpasning
-Hvis det er relevant for tjenesten eller applikationen, kan du tilbyde muligheder for brugeren at tilpasse deres oplevelse. Dette kan omfatte indstillinger for sprog, temaer, eller præferencer, der gør det muligt for brugeren at tilpasse tjenesten eller applikationen til deres individuelle behov og præferencer.
-
-## Opfølgning
-Følg op med brugeren efter en vis periode for at sikre, at de er i stand til at bruge tjenesten eller applikationen effektivt og besvare eventuelle spørgsmål eller bekymringer, de måtte have.
-
 ##Feedback
-Opfordr brugeren til at give feedback om deres onboarding-oplevelse. Dette kan hjælpe med at identificere eventuelle forbedringer, der kan foretages i fremtidige onboarding-processer.
+You can contact Wishlist freaks customer support directly through GitHub. The customer support team will be able to answer your questions, assist with technical issues, or provide guidance on how to use the service.
+
+We highly appreciate your feedback! We encourage you to provide feedback on your onboarding experience with Wishlist freaks. Your feedback is valuable to us as it can help us identify any areas where we can improve our onboarding process and make it even better for future users.
+
+
