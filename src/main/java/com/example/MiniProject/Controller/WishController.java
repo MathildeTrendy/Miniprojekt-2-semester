@@ -14,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class WishController {
@@ -33,13 +35,14 @@ public class WishController {
     public String login(@RequestParam("email") String email, @RequestParam("password") String password,
                         HttpSession session, Model model) {
         try {
-            User user = wishRepository.verifyUser(email, password);
+            User user = wishRepository.verifyUser(email);
             if (user == null) {
                 // User not found in the database, add an error message to the model
                 model.addAttribute("error", "Invalid email or password");
                 return "login";
             }
             session.setAttribute("user", user);
+            session.setAttribute("userEmail", email);
             return "redirect:/myprofile";
         } catch (LoginSampleException e) {
             // Handle the exception
@@ -47,6 +50,7 @@ public class WishController {
             return "login";
         }
     }
+
     @GetMapping("/login")
     public String login(){
         return "login";
@@ -117,7 +121,31 @@ public class WishController {
         return "redirect:/myprofile";
     }
 
-        @PostMapping("/editWishlist/{id}")
+    //Show a users wishlists:
+    @GetMapping("/myprofile/userlists")
+    public String getUserLists(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            model.addAttribute("errorMsg", "You must be logged in to view your profile.");
+            return "login";
+        }
+        try {
+            List<WishLists> userLists = wishRepository.findByEmail(user.getEmail());
+            if (userLists.isEmpty()) {
+                model.addAttribute("errorMsg", "You have no wish lists.");
+            } else {
+                model.addAttribute("userLists", userLists);
+            }
+            model.addAttribute("user", user);
+            return "myprofile";
+        } catch (SQLException e) {
+            model.addAttribute("errorMsg", "An error occurred while retrieving your wish lists.");
+            return "error";
+        }
+    }
+
+
+    @PostMapping("/editWishlist/{id}")
     public String editWishlist(@RequestParam("id") int id, @RequestBody WishLists wishLists) throws SQLException {
         wishRepository.editWishlist(id, wishLists);
         return "redirect:/myprofile";

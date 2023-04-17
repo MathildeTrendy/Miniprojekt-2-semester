@@ -4,7 +4,6 @@ public class WishLists {
 
     //Field of attributes
     private String wishListName;
-
     private String userEmail;
     private int id;
 
@@ -13,6 +12,10 @@ public class WishLists {
         this.userEmail = userEmail;
         this.id = id;
     }
+
+    public WishLists(int id, String wishListName, String userEmail) {
+    }
+
 
     public String getWishListName() {
         return wishListName;

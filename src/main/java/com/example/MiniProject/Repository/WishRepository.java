@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class WishRepository {
@@ -50,19 +52,18 @@ public class WishRepository {
 
 
 
-    public User verifyUser(String email, String password) throws LoginSampleException {
+    public User verifyUser(String email) throws LoginSampleException {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
-            String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
+            String sql = "SELECT u.email, wl.* \n" +
+                    "FROM miniProjekt.user u \n" +
+                    "JOIN miniProjekt.wishLists wl ON u.email = wl.userEmail \n" +
+                    "WHERE u.email = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, email);
-                statement.setString(2, password);
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if (resultSet.next()) {
                         User user = new User();
                         user.setEmail(resultSet.getString("email"));
-                        user.setPassword(resultSet.getString("password"));
-                        user.setFirstName(resultSet.getString("firstname"));
-                        user.setLastName(resultSet.getString("lastname"));
                         return user;
                     } else {
                         throw new LoginSampleException("Could not validate user");
@@ -74,9 +75,10 @@ public class WishRepository {
         }
     }
 
+
     public User getUserByEmail(String email) throws SQLException {
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM user WHERE email = ?");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM miniprojekt.wishlists WHERE userEmail =?");
             stmt.setString(1, email);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -119,8 +121,6 @@ public class WishRepository {
     }
 
 
-
-
     // Metode til at opdatere en ønskeliste i databasen
     public void updateWishlist(WishLists wishlists) throws SQLException {
         try (Connection connection = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)) {
@@ -134,27 +134,33 @@ public class WishRepository {
 
     // Metode til at hente en ønskeliste fra databasen baseret på et givet ID
 
-    /*
-    public WishLists findById(int id) throws SQLException {
-        WishLists wishLists = null;
-        try (Connection connection = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)) {
-            String SQL = "SELECT * FROM wish_list WHERE id=?";
+
+    public List<WishLists> findByEmail(String userEmail) throws SQLException {
+        if (userEmail == null || userEmail.isEmpty()) {
+            throw new IllegalArgumentException("User email cannot be null or empty");
+        }
+        List<WishLists> wishLists = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
+            String SQL = "SELECT u.email, wl.* \n" +
+                    "FROM miniProjekt.user u                    \n" +
+                    "JOIN miniProjekt.wishLists wl ON u.email = wl.userEmail\n" +
+                    "WHERE u.email = ?\n";
             PreparedStatement statement = connection.prepareStatement(SQL);
-            statement.setInt(1, id);
+            statement.setString(1, userEmail);
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String wishListName = resultSet.getString("wishListName");
-                String userEmail = resultSet.getString("userEmail");
-                wishLists = new WishLists(id,wishListName,userEmail);
-                System.out.println(id);
+                String email = resultSet.getString("email");
+                WishLists list = new WishLists(id, wishListName, email);
+                wishLists.add(list);
             }
         }
         return wishLists;
     }
 
-/*
-     */
+
+
     public int editWishlist(int id, WishLists wishLists) throws SQLException {
         try (Connection connection = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)) {
 
@@ -211,7 +217,6 @@ public class WishRepository {
             throw new RuntimeException(e);
         }
     }
-
 
 }
 
