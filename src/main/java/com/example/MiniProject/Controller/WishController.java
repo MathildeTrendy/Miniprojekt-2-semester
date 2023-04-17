@@ -74,13 +74,6 @@ public class WishController {
         return "signupsucces";
     }
 
-
-   /* @GetMapping("/wishlistOverview")
-    public String showAllWishlists(@RequestParam ("listName") String listName) {
-        return "createWishlist";
-    }
-**/
-
     @GetMapping("/myprofile")
     public String welcomeProfile(Model model) {
         model.addAttribute("welcome", "Welcome");
@@ -97,7 +90,6 @@ public class WishController {
         }
         return "redirect:/myprofile";
     }
-
 
     @PostMapping("/editWishlist/{id}")
     public String editWishlist(@RequestParam("id") int id, @RequestBody WishLists wishLists) throws SQLException {
