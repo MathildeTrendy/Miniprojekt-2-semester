@@ -2,7 +2,6 @@ package com.example.MiniProject.Repository;
 
 import com.example.MiniProject.DTO.ItemFormDTO;
 import com.example.MiniProject.DTO.UserFormDTO;
-import com.example.MiniProject.DTO.WishlistFormDTO;
 import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Utility.LoginSampleException;
@@ -24,36 +23,32 @@ public class WishRepository {
     private String databaseUserPassword;
 
     public User createUser(UserFormDTO userDTO) throws LoginSampleException {
-        //Creates a database connection in Java by specifying the URL, username, and password.
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
-            //SQL query used to insert specified data into the database.
+            if (connection.isValid(10)) {
+                System.out.println("Connection is valid.");
+            } else {
+                System.out.println("Connection is not valid.");
+            }
 
             String SQL = "INSERT INTO miniprojekt.user(firstname, lastname, email, password) VALUES (?, ?, ?, ?)";
 
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, userDTO.getFirstName());
-            preparedStatement.setString(2, userDTO.getLastName());
-            preparedStatement.setString(3, userDTO.getEmail());
-            preparedStatement.setString(4, userDTO.getPassword());
+            try (PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+                preparedStatement.setString(1, userDTO.getFirstName());
+                preparedStatement.setString(2, userDTO.getLastName());
+                preparedStatement.setString(3, userDTO.getEmail());
+                preparedStatement.setString(4, userDTO.getPassword());
 
-            preparedStatement.executeUpdate();
-            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+                preparedStatement.executeUpdate();
 
-            resultSet.next();
-
-            long id = resultSet.getLong(1);
-
-            User user = new User(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(), userDTO.getPassword());
-
-            user.setId(id);
-
-            return user;
-
+                User user = new User(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(), userDTO.getPassword());
+                return user;
+            }
         } catch (SQLException e) {
-
-            throw new LoginSampleException(e.getMessage());
+            throw new LoginSampleException("An error occurred while creating the user");
         }
     }
+
+
 
     public User verifyUser(String email, String password) throws LoginSampleException {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
@@ -76,6 +71,27 @@ public class WishRepository {
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error verifying user", e);
+        }
+    }
+
+    public User getUserByEmail(String email) throws SQLException {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM user WHERE email = ?");
+            stmt.setString(1, email);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    User user = new User();
+                    user.setFirstName(rs.getString("firstName"));
+                    user.setLastName(rs.getString("lastName"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPassword(rs.getString("password"));
+                    return user;
+                } else {
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error getting user by email", e);
         }
     }
 

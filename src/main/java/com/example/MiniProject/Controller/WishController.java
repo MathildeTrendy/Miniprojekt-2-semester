@@ -2,10 +2,8 @@ package com.example.MiniProject.Controller;
 
 
 import com.example.MiniProject.DTO.UserFormDTO;
-import com.example.MiniProject.DTO.WishlistFormDTO;
 import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Model.WishLists;
-import com.example.MiniProject.Repository.DbRepository;
 import com.example.MiniProject.Repository.WishRepository;
 
 import com.example.MiniProject.Utility.LoginSampleException;
@@ -58,28 +56,32 @@ public class WishController {
     public String showCreateUser(Model model) {
         UserFormDTO user = new UserFormDTO();
         model.addAttribute("user", user);
-        return "signUp";
+        return "signup";
     }
 
     @PostMapping("/signup")
-    public String createUser(HttpServletRequest request, @ModelAttribute UserFormDTO userFormDTO) throws LoginSampleException {
-        if (userFormDTO.getEmail() == null) {
+    public String createUser(HttpServletRequest request, @ModelAttribute UserFormDTO userFormDTO) throws LoginSampleException, SQLException {
+        // Check if user with same email already exists
+        User existingUser = wishRepository.getUserByEmail(userFormDTO.getEmail());
+        if (existingUser != null) {
+            // Return error message if user already exists
             return "signupfail";
         }
-
-        UserFormDTO newUserFormDTO = new UserFormDTO(userFormDTO.getFirstName(), userFormDTO.getLastName(), userFormDTO.getEmail(), userFormDTO.getPassword());
-        User user = wishRepository.createUser(newUserFormDTO);
-
-        if (user != null) {
-            request.getSession().setAttribute("email", user.getEmail());
-            return "redirect:/signupsucces";
+        // Create new user if email is unique
+        User newUser = wishRepository.createUser(userFormDTO);
+        if (newUser != null) {
+            // Set email in session and redirect to success page
+            request.getSession().setAttribute("email", newUser.getEmail());
+            return "signupsucces";
         } else {
+            // Return error message if user creation fails
             return "signupfail";
         }
     }
 
+
     @GetMapping("signupsucces")
-    public String signUpSucces() {
+    public String signupSucces() {
         return "signupsucces";
     }
 
