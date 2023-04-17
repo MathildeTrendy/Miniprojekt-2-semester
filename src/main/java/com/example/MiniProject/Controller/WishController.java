@@ -29,7 +29,12 @@ public class WishController {
     public String index() {
         return "frontPage";
     }
-    @PostMapping({"/",""})
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+    @PostMapping("/login")
     public String index(HttpServletRequest request, @ModelAttribute UserFormDTO userformDTO, Model model) {
         // Trying to login
         try {
