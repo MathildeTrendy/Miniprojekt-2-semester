@@ -1,50 +1,72 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>WishListFreak</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Web-based application for creating wishlists">
+    <title>WishList freaks - Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .logo {
+            width: 50%; /* Make the image container take up the full width of its parent container */
+            height: 50%; /* Make the image container take up the full height of its parent container */
+            background-image: url('https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/4409/set-of-gifts-clipart-md.png'); /* Specify the URL of the image */
+            background-size: cover; /* Crop the image to cover the container */
+            background-position: center; /* Center the image within the container */
+        }
+
+        .signUp-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .signUp-form label {
+            margin-bottom: 5px; /* Add margin between the label and input fields */
+        }
+
+        .signUp-form input {
+            margin-bottom: 10px; /* Add margin between the input fields */
+            padding: 5px; /* Add padding to input fields */
+            width: 200px; /* Set the width of input fields */
+        }
+
+        .signUp-form input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .signUp-form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
-<div class="logoheader">
-    <img src="/imgs/logo.png" alt="Logo" class="logoSignupPage">
-</div>
-
 <body>
-<div class ="signuptext">
-        <h1> Sign up as a wish list freak!</h1>
-</div>
-
-<div class="SignUpForm">
-    <form th:action="@{/signup}" th:object="${user}" method="post">
-        <p>First name* <input type ="text" th:field="*{firstName}"/> </p>
-        <p>Last name* <input type ="text" th:field="*{lastName}"/> </p>
-        <p>E-mail* <input type ="text" th:field="*{email}"/></p>
-        <p>Password* <input type ="password" th:field="*{password}"></p>
-        <p>* required fields</p>
-        <p><input type="submit" value="Sign up"/></p>
-    </form>
-</div>
+<div class="logo"></div>
+<h1>Sign Up</h1>
+<form class="signUp-form" action="/signup" method="post"> <!-- Update form action to /signup -->
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required>
+    <br>
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required>
+    <br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <input type="submit" value="Sign Up">
+</form>
 </body>
-
-<style>
-    .signuptext{
-        display: flex;
-        justify-content: center;
-    }
-    .logoheader{
-        display: flex;
-        justify-content: center;
-    }
-    .logoSignupPage {
-        width: 50%;
-    }
-
-    .SignUpForm{
-        display: flex;
-        justify-content: center;
-    }
-
-</style>
-
 </html>

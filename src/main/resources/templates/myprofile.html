@@ -1,173 +1,210 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Your wishlist</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Web-based application for creating wishlists">
-</head>
+    <title>Profile - WishList freaks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2; /* Set the background color to grayish tone */
+        }
 
-<div class ="logoheader">
-    <img src="/imgs/logo.png" alt="Logo" class="logoWishlistpage">
+        .header {
+            background-color: white;
+            color: black;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            position: relative; /* Add position relative for positioning the beam */
+            height: 200px; /* Increase height to accommodate larger beam */
+        }
+
+        .logo {
+            width: 350px;
+            height: 200px; /* Update height of logo */
+            background-image: url('https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/4409/set-of-gifts-clipart-md.png');
+            background-size: cover;
+            background-position: center;
+            margin-right: 5px;
+            margin-top: 5px; /* Update margin-top value to move the logo higher */
+        }
+
+        .header-text {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .beam {
+            background-color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 100%; /* Set the beam width to 100% to cover the entire header */
+            z-index: -1; /* Move the beam to the background */
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-info img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .profile-info h2 {
+            margin: 0;
+        }
+
+        .profile-info p {
+            margin-top: 10px;
+        }
+
+        .logout {
+            margin-top: 20px;
+        }
+
+        .logout a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .logout a:hover {
+            text-decoration: underline;
+        }
+
+        .buttons {
+            position: absolute;
+            left: 20px;
+            top: 250px;
+        }
+
+        .button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .modal {
+            display: none; /* Hide the modal by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top of everything */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scrolling if needed */
+            background-color: rgba(0, 0, 0, 0.4); /* Black background with opacity */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            max-width: 300px; /* Set a max width for the modal content */
+        }
+
+        close {
+            color: #888;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        /* Wishlist box styles */
+        .wishlist-box {
+            background-color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            margin-top: 20px; /* Add margin top to push the wishlist box down */
+        }
+
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="logo"></div>
+    <div class="header-text">WishList freaks</div>
+    <div class="beam"></div>
+</div>
+<div class="buttons">
+    <a href="#" class="button" onclick="showModal()"> Make a wishlist</a>
+    <a href="#" class="button">Make a wish</a>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Create a Wishlist</h3>
+            <input type="text" id="wishlistName" placeholder="Enter wishlist name">
+            <button onclick="submitWishlist()">Create</button>
+        </div>
+    </div>
+
+    <div id="wishlistContainer">
+
+
 </div>
 
-<body>
-<section class="modal hidden">
-    <div class="flex">
-        <img src="/imgs/logo.png" width="50px" height="50px" alt="logo" />
-        <button class="btn-close">⨉</button>
-    </div>
-    <div>
-        <h3>Create new wish-list</h3>
-        <p>
-            Type in the name of your new wish-list and press 'add wishlist'
-        </p>
-    </div>
-
-    <input type="email" id="email" placeholder="INSERT WISHLIST NAME" />
-    <button class="btn">add wishlist</button>
-</section>
-
-<div class="overlay hidden"></div>
-<button class="btn btn-open">add new wish-list</button>
-
-
 <script>
-    const modal = document.querySelector(".modal");
-    const overlay = document.querySelector(".overlay");
-    const openModalBtn = document.querySelector(".btn-open");
-    const closeModalBtn = document.querySelector(".btn-close");
+    // Show the modal
+    function showModal() {
+        document.getElementById('myModal').style.display = 'block';
+    }
 
-    const openModal = function () {
-        modal.classList.remove("hidden");
-        overlay.classList.remove("hidden");
-    };
+    // Close the modal
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
 
-    openModalBtn.addEventListener("click", openModal);
+    // Handle form submission
+    function submitWishlist() {
+        var wishlistName = document.getElementById('wishlistName').value;
+        // You can perform further actions with the wishlist name, e.g., send it to the server
+        // via AJAX, etc.
 
-    const closeModal = function () {
-        modal.classList.add("hidden");
-        overlay.classList.add("hidden");
-    };
+        // Create a wishlist box with the entered wishlist name
+        var wishlistBox = document.createElement('div');
+        wishlistBox.className = 'wishlist-box';
+        wishlistBox.textContent = wishlistName;
 
-    closeModalBtn.addEventListener("click", closeModal);
+        // Add the wishlist box to the wishlist container
+        var wishlistContainer = document.getElementById('wishlistContainer');
+        wishlistContainer.appendChild(wishlistBox);
 
-    overlay.addEventListener("click", closeModal);
+        // Close the modal after submission
+        closeModal();
+    }
 
-    const addWishlist = function () {
-        const wishlistName = document.getElementById("email").value;
-        // Send wishlistName to server using an HTTP request, e.g., fetch() or XMLHttpRequest
-        // After successful response, navigate to wishlistOverview page
-        window.location.href = "/wishlistOverview";
-    };
 
-    const addWishlistBtn = document.querySelector(".modal .btn");
-    addWishlistBtn.addEventListener("click", addWishlist);
 </script>
 
 </body>
-
-<style>
-
-    .logoheader{
-        display: flex;
-        justify-content: center;
-        background: transparent;
-    }
-
-    .logoWishlistpage{
-        width: 50%;
-    }
-
-    body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: #222;
-        position: relative;
-        min-height: 100vh;
-    }
-
-    .modal {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 0.4rem;
-        width: 450px;
-        padding: 1.3rem;
-        min-height: 250px;
-        position: absolute;
-        top: 20%;
-        background-color: white;
-        border: 1px solid #ddd;
-        border-radius: 15px;
-        z-index: 2;
-    }
-
-    .modal .flex {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .modal input {
-        padding: 0.7rem 1rem;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 0.9em;
-    }
-
-    .modal p {
-        font-size: 0.9rem;
-        color: #777;
-        margin: 0.4rem 0 0.2rem;
-    }
-
-    button {
-        cursor: pointer;
-        border: none;
-        font-weight: 600;
-    }
-
-    .btn {
-        display: inline-block;
-        padding: 0.8rem 1.4rem;
-        font-weight: 700;
-        background-color: black;
-        color: white;
-        border-radius: 5px;
-        text-align: center;
-        font-size: 1em;
-    }
-
-    .btn-open {
-        position: absolute;
-        bottom: 150px;
-    }
-
-    .btn-close {
-        transform: translate(10px, -20px);
-        padding: 0.5rem 0.7rem;
-        background: #eee;
-        border-radius: 50%;
-    }
-    .overlay {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(3px);
-        z-index: 1;
-    }
-    .hidden{
-        display: none;
-    }
-
-</style>
 </html>
 

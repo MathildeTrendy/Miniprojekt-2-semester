@@ -57,7 +57,7 @@ public class WishController {
         User user = wishRepository.createUser(userFormDTO);
         if (user != null) {
             request.getSession().setAttribute("email", user.getEmail());
-            return "redirect:/signupsucces";
+            return "redirect:/myprofile";
         } else {
             return "signupfail";
         }

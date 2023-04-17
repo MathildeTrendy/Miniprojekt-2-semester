@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile - WishList freaks</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2; /* Set the background color to grayish tone */
+    }
+
+    .header {
+      background-color: white;
+      color: black;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      position: relative; /* Add position relative for positioning the beam */
+      height: 200px; /* Increase height to accommodate larger beam */
+    }
+
+    .logo {
+      width: 350px;
+      height: 200px; /* Update height of logo */
+      background-image: url('https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/4409/set-of-gifts-clipart-md.png');
+      background-size: cover;
+      background-position: center;
+      margin-right: 5px;
+      margin-top: 5px; /* Update margin-top value to move the logo higher */
+    }
+
+    .header-text {
+      font-size: 24px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .beam {
+      background-color: #fff;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%; /* Set the beam width to 100% to cover the entire header */
+      z-index: -1; /* Move the beam to the background */
+    }
+
+  </style>
+</head>
+<body>
+<div class="header">
+  <div class="logo"></div>
+  <div class="header-text">WishList freaks</div>
+  <div class="beam"></div>
+</div>
+</body>
+</html>

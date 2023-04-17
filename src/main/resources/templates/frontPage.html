@@ -1,167 +1,68 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>WishListFreak</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Web-based application for creating wishlists">
+    <title>Wishlist Freaks - Front Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        .container {
+            display: flex; /* Use flexbox */
+            justify-content: center; /* Center the content horizontally */
+            align-items: center; /* Center the content vertically */
+            width: 100%; /* Specify the desired width of the cropped image container */
+            height: calc(100vh - 100px); /* Use viewport height minus 100px for the container (to accommodate buttons) */
+            overflow: hidden; /* Hide the overflowing content */
+            margin-top: 50px; /* Adjust margin from the top for spacing */
+        }
+
+        .image {
+            width: 50%; /* Make the image container take up the full width of its parent container */
+            height: 50%; /* Make the image container take up the full height of its parent container */
+            background-image: url('https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/4409/set-of-gifts-clipart-md.png'); /* Specify the URL of the image */
+            background-size: cover; /* Crop the image to cover the container */
+            background-position: center; /* Center the image within the container */
+        }
+
+        .buttons {
+            text-align: center; /* Center the buttons within the container */
+            position: absolute; /* Position the buttons absolutely for centering */
+            top: 80%; /* Move the buttons down by 50% from the top */
+            left: 50%; /* Move the buttons horizontally by 50% from the left */
+            transform: translate(-50%, -50%); /* Center the buttons both horizontally and vertically */
+        }
+
+        .buttons h1 {
+            font-size: 36px; /* Font size of "WishList Freaks" heading */
+            font-weight: bold; /* Bold font weight */
+        }
+
+        .buttons a {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            border-radius: 5px;
+        }
+
+        .buttons a:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-
-<div class="loginforms">
-    <h1>Already have an account? sign in here</h1>
-<form th:action="@{/}" method="post">
-    <div>
-        <input type="email" id="email" name="email" required>
-        <label for="email">E-mail</label>
-    </div>
-    <div>
-        <input type="password" id="password" name="password" required>
-        <label for="password">Password</label>
-    </div>
-    <div>
-        <button type="submit">Login</button>
-    </div>
-    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
-        <span th:text="${errorMessage}"></span>
-    </div>
-</form>
-<hr>
-    <div class="signupforms">
-<h1>Don't have an account yet? sign up below</h1>
-<form th:action="@{/signup}" method="post">
-    <div>
-        <input type="text" id="firstName" name="firstName" required>
-        <label for="firstName">First name</label>
-    </div>
-    <div>
-        <input type="text" id="lastName" name="lastName" required>
-        <label for="lastName">Last name</label>
-    </div>
-    <div>
-        <input type="email" id="email" name="email" required>
-        <label for="email">E-mail</label>
-    </div>
-    <div>
-        <input type="password" id="password" name="password" required>
-        <label for="password">Password</label>
-    </div>
-    <div>
-        <button type="submit">Sign Up</button>
-    </div>
-</form>
+<div class="container">
+    <div class="image"></div>
 </div>
+<div class="buttons">
+    <h1>WishList Freaks</h1>
+    <a href="LogIn.html">Log in</a>
+    <a href="SignUp.html">Sign up</a>
 </div>
 </body>
-
-<style>
-    .forms {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.forms form {
-    width: 300px;
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-}
-
-.forms form input[type="email"],
-.forms form input[type="password"],
-.forms form input[type="text"] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: none;
-    border-radius: 4px;
-    background-color: #fff;
-}
-
-.forms form button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 16px;
-}
-
-.signupforms {
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-}
-.loginforms{
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-}
-
-.signupforms h1  {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-.loginforms h1{
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.signupforms input[type="email"],
-.signupforms input[type="password"],
-.signupforms input[type="text"] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: none;
-    border-radius: 4px;
-    background-color: #fff;
-}
-.loginforms input[type="email"],
-.loginforms input[type="password"],
-.loginforms input[type="text"] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: none;
-    border-radius: 4px;
-    background-color: #fff;
-}
-
-.signupforms button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 16px;
-}
-.loginforms button[type="subit"]{
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 16px;
-}
-
-
-
-</style>
 </html>
