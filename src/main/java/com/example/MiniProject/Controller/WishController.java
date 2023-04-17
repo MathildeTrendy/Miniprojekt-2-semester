@@ -31,9 +31,10 @@ public class WishController {
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
+
     @PostMapping("/login")
     public String login(@RequestParam("email") String email,
                         @RequestParam("password") String password,
@@ -48,7 +49,6 @@ public class WishController {
             model.addAttribute("errorMessage", "Invalid email or password");
             return "login";
         }
-
     }
 
     @GetMapping("/signup")
@@ -63,7 +63,7 @@ public class WishController {
         User user = wishRepository.createUser(userFormDTO);
         if (user != null) {
             request.getSession().setAttribute("email", user.getEmail());
-            return "redirect:/myprofile";
+            return "redirect:/signupsucces";
         } else {
             return "signupfail";
         }
@@ -86,7 +86,6 @@ public class WishController {
         model.addAttribute("welcome", "Welcome");
         return "myprofile";
     }
-
 
 
     @PostMapping(value = "/myprofile{listName}")
