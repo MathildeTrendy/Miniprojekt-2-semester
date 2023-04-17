@@ -41,7 +41,7 @@
             font-weight: bold; /* Bold font weight */
         }
 
-        .buttons a {
+        .buttons button {
             display: inline-block;
             padding: 12px 20px;
             background-color: #007bff;
@@ -51,7 +51,7 @@
             border-radius: 5px;
         }
 
-        .buttons a:hover {
+        .buttons button:hover {
             background-color: #0056b3;
         }
     </style>
@@ -62,8 +62,12 @@
 </div>
 <div class="buttons">
     <h1>WishList Freaks</h1>
-    <a href="login.html">Log in</a>
-    <a href="SignUp.html">Sign up</a>
+    <form th:action="@{/login}" method="get">
+        <button type="submit" class="button">Login</button>
+    </form>
+    <form th:action="@{/signup}" method="get">
+        <button type="submit" class="button">Sign up</button>
+    </form>
 </div>
 </body>
 </html>
