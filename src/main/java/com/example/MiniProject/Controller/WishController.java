@@ -91,17 +91,15 @@ public class WishController {
         return "myprofile";
     }
 
-
     @PostMapping("/myprofile/createlist")
     public String createWishlist(@RequestParam("wishlistName") String wishlistName, HttpSession session, RedirectAttributes redirectAttributes) {
         User user = (User) session.getAttribute("user");
-        System.out.println("Received wishListName:" + wishlistName);
         try {
             if (user != null) {
                 String userEmail = user.getEmail();
                 int id = wishRepository.createWishList(wishlistName, user.getEmail());
                 redirectAttributes.addFlashAttribute("successMessage", "Wishlist created successfully!");
-                return "myprofile";
+                return "redirect:/myprofile?wishlistName=" + wishlistName;
             } else {
             }
         } catch (SQLException e) {
@@ -109,7 +107,6 @@ public class WishController {
         }
         return "redirect:/myprofile";
     }
-
 
         @PostMapping("/editWishlist/{id}")
     public String editWishlist(@RequestParam("id") int id, @RequestBody WishLists wishLists) throws SQLException {
