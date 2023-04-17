@@ -1,0 +1,37 @@
+
+//Sets the name of the GitHub Actions workflow to "Continuous Integration". It's a user-defined name for the workflow, which helps to identify and differentiate it from other workflows in the repository.
+
+name: Continuous Integration 	
+
+on:  			//specifies the events that trigger the workflow.
+ 
+ push:		//indicates that the workflow should be triggered on a push event(occurs when changes are pushed to the repository)
+   
+ branches: 		 //specifies the branches on which the push event should trigger the workflow. 
+      - main
+  
+pull_request:  		//indicates that the workflow should be triggered on a pull request event (occurs when a pull request is created or updated)
+    branches: 
+      - main
+
+jobs:				//defines a list of jobs that the workflow should perform.
+  
+build:					//user-defined name for the job, which helps to identify and differentiate it from other jobs in the workflow.
+
+j runs-on: ${{ matrix.os }} 		//indicates the operating system on which the job should run. 
+   
+ strategy:
+      
+matrix:					// defines the matrix strategy for the job, which allows for specifying multiple values for the same key.
+        
+os: [macos-latest, windows-latest] 		//specifies a list of operating systems (macOS and Windows) that the job should run on.
+
+- uses: actions/checkout@v2
+- name: Set up JDK 17
+- uses: actions/setup-java@v2
+with:
+    distribution: 'adopt'				//specifies the distribution of the JDK to be used, in this case, "AdoptOpenJDK".
+   
+ java-version: '17’ 		//specifies the version of the JDK to be set up, in this case, JDK 17.
+
+- name:  Build with Maven
