@@ -35,20 +35,22 @@ public class WishController {
         return "login";
     }
     @PostMapping("/login")
-    public String index(HttpServletRequest request, @ModelAttribute UserFormDTO userformDTO, Model model) {
-        // Trying to login
-        try {
-            User user = wishRepository.verifyUser(userformDTO.getEmail(), userformDTO.getPassword());
+    public String login(@RequestParam("email") String email,
+                        @RequestParam("password") String password,
+                        HttpSession userSession,
+                        Model model) {
+        User user = wishRepository.verifyUser(email, password);
 
-            request.getSession().setAttribute("email", user.getEmail());
+        if (user != null) {
+            userSession.setAttribute("email", email);
             return "redirect:/myprofile";
-
-            // if login fails, redirect to index with error message
-        } catch (LoginSampleException e) {
-            model.addAttribute("errorMessage", "An error occurred");
+        } else {
+            model.addAttribute("errorMessage", "Invalid email or password");
             return "frontPage";
         }
+
     }
+
 
     @GetMapping("/signup")
     public String showCreateUser(Model model) {

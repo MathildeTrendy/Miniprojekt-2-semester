@@ -63,11 +63,9 @@
   <input type="password" id="password" name="password" required>
   <br>
   <input type="submit" value="Log in">
-  <div th:if="${LoginFailedMsg}">
-    <p th:text="${LoginFailedMsg}"></p>
-    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
-      <span th:text="${errorMessage}"></span>
-    </div></div>
+  <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+    <span>User does not exist.</span>
+  </div>
 </form>
 </body>
 </html>
