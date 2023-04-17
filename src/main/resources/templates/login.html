@@ -63,7 +63,7 @@
   <input type="password" id="password" name="password" required>
   <br>
   <input type="submit" value="Log in">
-  <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+  <div th:if="${error}" class="alert alert-danger" role="alert">
     <span>Email or password incorrect please try again</span>
   </div>
 </form>

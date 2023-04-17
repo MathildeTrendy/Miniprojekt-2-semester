@@ -26,28 +26,28 @@ public class WishController {
     public WishController(WishRepository wishRepository) {
         this.wishRepository = wishRepository;
     }
-
     @GetMapping("/")
     public String index() {
         return "frontPage";
     }
     @PostMapping("/login")
-    public String login(@RequestParam("email") String email,
-                        @RequestParam("password") String password,
-                        HttpSession userSession,
-                        Model model) {
-        User user = wishRepository.verifyUser(email, password);
-
-        if (user != null) {
-            userSession.setAttribute("email", email);
-            return "redirect:/myprofile";
-        } else {
-            model.addAttribute("errorMessage", "Invalid email or password");
-            return "frontPage";
+    public String login(@RequestParam("email") String email, @RequestParam("password") String password,
+                        HttpSession session, Model model) {
+        try {
+            User user = wishRepository.verifyUser(email, password);
+            if (user == null) {
+                // User not found in the database, add an error message to the model
+                model.addAttribute("error", "Invalid email or password");
+                return "login";
+            }
+            session.setAttribute("user", user);
+            return "redirect:/wishes";
+        } catch (LoginSampleException e) {
+            // Handle the exception
+            model.addAttribute("error", "An error occurred while logging in. Please try again later.");
+            return "login";
         }
-
     }
-
     @GetMapping("/login")
     public String login(){
         return "login";
