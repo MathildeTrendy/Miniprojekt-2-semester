@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.SQLException;
 
@@ -62,7 +63,13 @@ public class WishController {
 
     @PostMapping("/signup")
     public String createUser(HttpServletRequest request, @ModelAttribute UserFormDTO userFormDTO) throws LoginSampleException {
-        User user = wishRepository.createUser(userFormDTO);
+        if (userFormDTO.getEmail() == null) {
+            return "signupfail";
+        }
+
+        UserFormDTO newUserFormDTO = new UserFormDTO(userFormDTO.getFirstName(), userFormDTO.getLastName(), userFormDTO.getEmail(), userFormDTO.getPassword());
+        User user = wishRepository.createUser(newUserFormDTO);
+
         if (user != null) {
             request.getSession().setAttribute("email", user.getEmail());
             return "redirect:/signupsucces";
@@ -76,30 +83,32 @@ public class WishController {
         return "signupsucces";
     }
 
-
-   /* @GetMapping("/createWishlist")
-    public String createWishlist(@RequestParam ("listName") String listName) {
-        return "createWishlist";
-    }
-**/
-
     @GetMapping("/myprofile")
     public String welcomeProfile(Model model) {
         model.addAttribute("welcome", "Welcome");
         return "myprofile";
     }
 
-    @PostMapping(value = "/myprofile")
-    public String createWishlist(@RequestParam("email") String email, HttpSession userSession, Model model, @RequestParam("listName") WishlistFormDTO listName) {
-        userSession.setAttribute("email", email);
-        userSession.getAttribute("email");
-        if (email.length() > 0) {
-            wishRepository.createWishList(listName);
+    @PostMapping("/myprofile/createlist")
+    public String createWishlist(@RequestParam("wishlistName") String wishlistName, HttpSession session, RedirectAttributes redirectAttributes) {
+        User user = (User) session.getAttribute("user");
+        System.out.println("Received wishListName:" + wishlistName);
+        try {
+            if (user != null) {
+                String userEmail = user.getEmail();
+                int id = wishRepository.createWishList(wishlistName, user.getEmail());
+                redirectAttributes.addFlashAttribute("successMessage", "Wishlist created successfully!");
+                return "createlist";
+            } else {
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return "redirect:/myprofile";
     }
 
-    @PostMapping("/editWishlist/{id}")
+
+        @PostMapping("/editWishlist/{id}")
     public String editWishlist(@RequestParam("id") int id, @RequestBody WishLists wishLists) throws SQLException {
         wishRepository.editWishlist(id, wishLists);
         return "redirect:/myprofile";
@@ -122,7 +131,7 @@ public class WishController {
             wishRepository.findById(id);
 
             // Opdater ønskelistens oplysninger baseret på de nye værdier fra den modtagne wishlist
-            wishLists.setWishlistName(wishLists.getWishlistName());
+            wishLists.setWishListName(wishLists.getWishlistName());
 
             // Gem den opdaterede ønskeliste i databasen
             wishRepository.updateWishlist(wishLists);

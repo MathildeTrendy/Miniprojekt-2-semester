@@ -80,31 +80,29 @@ public class WishRepository {
     }
 
     // Method to create a new wishlist in the database
-    public int createWishList(WishlistFormDTO wishlistFormDTO) {
-        try (Connection connection = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)) {
+    public int createWishList(String wishListName, String userEmail) throws SQLException {
+        int id = -1;
+        String sql = "INSERT INTO wishlists(wishListName, userEmail) VALUES(?, ?)";
 
-            //SQL query used to insert specified data into the database.
-            String SQL = "INSERT INTO wishLists " +
-                    "(listName)" +
-                    "VALUES (\"" +
-                    wishlistFormDTO.getListName() + "\")";
-
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.execute();
-
-            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-
-            int generatedKey = 0;
-
-            if (resultSet.next()) {
-                generatedKey = resultSet.getInt(1);
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde");
+             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, wishListName);
+            preparedStatement.setString(2, userEmail);
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected == 1) {
+                ResultSet resultSet = preparedStatement.getGeneratedKeys();
+                if (resultSet.next()) {
+                    id = resultSet.getInt(1);
+                }
             }
-            return generatedKey;
-
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error creating wish list: " + e.getMessage());
+            throw e;
         }
+        return id;
     }
+
+
 
 
     // Metode til at opdatere en ønskeliste i databasen
@@ -112,34 +110,40 @@ public class WishRepository {
         try (Connection connection = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)) {
             String SQL = "UPDATE wish_list SET name=? WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(SQL);
-            statement.setString(1, wishlists.getWishlistName());
+            statement.setString(1, wishlists.getWishListName());
             statement.setInt(2, wishlists.getId()); // Brug getId() til at få id'et for den ønskeliste, der skal opdateres
             int resultSet = statement.executeUpdate();
         }
     }
 
     // Metode til at hente en ønskeliste fra databasen baseret på et givet ID
+
+    /*
     public WishLists findById(int id) throws SQLException {
+        WishLists wishLists = null;
         try (Connection connection = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)) {
             String SQL = "SELECT * FROM wish_list WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(SQL);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                WishLists wishlists = new WishLists(""); //hør lige de andre ad
-                wishlists.setId(resultSet.getInt("id")); // Bruges setId() til at sætte id'et på ønskelisten
-                wishlists.setWishlistName(resultSet.getString("name")); // Bruges til at sætte navnet på ønskelisten
-                return wishlists;
+                int id = resultSet.getInt("id");
+                String wishListName = resultSet.getString("wishListName");
+                String userEmail = resultSet.getString("userEmail");
+                wishLists = new WishLists(id,wishListName,userEmail);
+                System.out.println(id);
             }
         }
-        return null; // Returner null hvis ønskelisten ikke findes i databasen
+        return wishLists;
     }
 
+/*
+     */
     public int editWishlist(int id, WishLists wishLists) throws SQLException {
         try (Connection connection = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)) {
 
             //SQL query used to insert specified data into the database.
-            String SQL = "UPDATE wish_list set" + " Name = \"" + wishLists.getWishlistName() + "\" WHERE wishlist_id = \"" + id + "\"";
+            String SQL = "UPDATE wish_list set" + " Name = \"" + wishLists.getWishListName() + "\" WHERE wishlist_id = \"" + id + "\"";
 
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.execute();
@@ -155,7 +159,7 @@ public class WishRepository {
     public int deleteWishlist(int id, WishLists wishLists) {
         try (Connection connection = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)) {
 
-            String SQL = "DELETE FROM wish_list" + "Name = \"" + wishLists.getWishlistName() + "\" WHERE wishlist_id = \"" + id + "\"";
+            String SQL = "DELETE FROM wish_list" + "Name = \"" + wishLists.getWishListName() + "\" WHERE wishlist_id = \"" + id + "\"";
             ;
 
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);

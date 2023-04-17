@@ -155,57 +155,14 @@
     <div class="header-text">WishList freaks</div>
     <div class="beam"></div>
 </div>
-<div class="buttons">
-    <a href="#" class="button" onclick="showModal()"> Make a wishlist</a>
-    <a href="#" class="button">Make a wish</a>
 
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h3>Create a Wishlist</h3>
-            <input type="text" id="wishlistName" placeholder="Enter wishlist name">
-            <button onclick="submitWishlist()">Create</button>
-        </div>
-    </div>
-
-    <div id="wishlistContainer">
+<form method="post" action="/myprofile/createlist">
+    <label for="wishlistName">Wishlist Name:</label>
+    <input type="text" id="wishlistName" name="wishlistName" required>
+    <button type="submit">Create Wishlist</button>
+</form>
 
 
-</div>
-
-<script>
-    // Show the modal
-    function showModal() {
-        document.getElementById('myModal').style.display = 'block';
-    }
-
-    // Close the modal
-    function closeModal() {
-        document.getElementById('myModal').style.display = 'none';
-    }
-
-    // Handle form submission
-    function submitWishlist() {
-        var wishlistName = document.getElementById('wishlistName').value;
-        // You can perform further actions with the wishlist name, e.g., send it to the server
-        // via AJAX, etc.
-
-        // Create a wishlist box with the entered wishlist name
-        var wishlistBox = document.createElement('div');
-        wishlistBox.className = 'wishlist-box';
-        wishlistBox.textContent = wishlistName;
-
-        // Add the wishlist box to the wishlist container
-        var wishlistContainer = document.getElementById('wishlistContainer');
-        wishlistContainer.appendChild(wishlistBox);
-
-        // Close the modal after submission
-        closeModal();
-    }
-
-
-</script>
-</div>
 </body>
 </html>
 
