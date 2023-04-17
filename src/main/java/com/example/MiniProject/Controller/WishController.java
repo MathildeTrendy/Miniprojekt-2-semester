@@ -41,7 +41,7 @@ public class WishController {
                 return "login";
             }
             session.setAttribute("user", user);
-            return "redirect:/wishes";
+            return "redirect:/myprofile";
         } catch (LoginSampleException e) {
             // Handle the exception
             model.addAttribute("error", "An error occurred while logging in. Please try again later.");
