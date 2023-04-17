@@ -21,3 +21,10 @@ j runs-on: ${{ matrix.os }}
   with:
     distribution: 'adopt'
     java-version: '17’
+    
+     - name: Build with Gradle
+        run: ./gradlew build
+      - name: Run unit tests
+        run: ./gradlew test
+      - name: Code quality check
+        run: ./gradlew check
