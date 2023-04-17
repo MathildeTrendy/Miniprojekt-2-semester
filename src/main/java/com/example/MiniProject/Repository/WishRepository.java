@@ -55,29 +55,29 @@ public class WishRepository {
         }
     }
 
-        public User verifyUser(String email, String password) throws LoginSampleException {
-            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
-                String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
-                try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                    statement.setString(1, email);
-                    statement.setString(2, password);
-                    try (ResultSet resultSet = statement.executeQuery()) {
-                        if (resultSet.next()) {
-                            User user = new User();
-                            user.setEmail(resultSet.getString("email"));
-                            user.setPassword(resultSet.getString("password"));
-                            user.setFirstName(resultSet.getString("firstname"));
-                            user.setLastName(resultSet.getString("lastname"));
-                            return user;
-                        } else {
-                            throw new LoginSampleException("Could not validate user");
-                        }
+    public User verifyUser(String email, String password) throws LoginSampleException {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
+            String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, email);
+                statement.setString(2, password);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        User user = new User();
+                        user.setEmail(resultSet.getString("email"));
+                        user.setPassword(resultSet.getString("password"));
+                        user.setFirstName(resultSet.getString("firstname"));
+                        user.setLastName(resultSet.getString("lastname"));
+                        return user;
+                    } else {
+                        throw new LoginSampleException("Could not validate user");
                     }
                 }
-            } catch (SQLException e) {
-                throw new RuntimeException("Error verifying user", e);
             }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error verifying user", e);
         }
+    }
 
     // Method to create a new wishlist in the database
     public int createWishList(WishlistFormDTO wishlistFormDTO) {
