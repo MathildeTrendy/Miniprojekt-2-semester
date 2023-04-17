@@ -46,7 +46,7 @@ public class WishController {
             return "redirect:/myprofile";
         } else {
             model.addAttribute("errorMessage", "Invalid email or password");
-            return "frontPage";
+            return "login";
         }
 
     }
