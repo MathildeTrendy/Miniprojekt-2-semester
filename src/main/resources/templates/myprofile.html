@@ -165,8 +165,11 @@
 
 <div class="lists">
     <p th:text="'Wishlist Name: ' + ${wishlistName}"></p>
-
 </div>
+
+<form class="logoutbtn" th:action="@{/logout}" method="get">
+    <button type="submit">Logout</button>
+</form>
 
 </body>
 </html>

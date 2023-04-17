@@ -83,6 +83,14 @@ public class WishController {
         return "signupsucces";
     }
 
+    //log out controller for button
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/login";
+    }
+
     @GetMapping("/myprofile")
     public String welcomeProfile(Model model, HttpSession session, @RequestParam(value = "wishlistName", required = false) String wishlistName) {
         if (wishlistName != null) {
