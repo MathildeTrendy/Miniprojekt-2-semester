@@ -17,7 +17,6 @@ Wishlist freaks is the ideal platform to help you keep track of your wishes and 
 -	Fill in your name, email address, and password.
 -	Click on "Sign up" to complete the process.
 -	Log in to your account and start using Wishlist freaks.
--	If you encounter any issues or have questions regarding Wishlist freaks, there are several ways you can seek help:
 
 ## Feedback
 You can contact Wishlist freaks customer support directly through GitHub. The customer support team will be able to answer your questions, assist with technical issues, or provide guidance on how to use the service.
