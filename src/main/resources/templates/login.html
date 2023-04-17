@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
   <title>WishList freaks - Log In</title>
   <style>
     body {
@@ -51,10 +52,11 @@
   </style>
 
 </head>
+
 <body>
 <div class="logo"></div>
 <h1>Login</h1>
-<form class="login-form" action="myprofile.html" method="post"> <!-- Replace "myprofile.html" with the URL or filename of your profile page -->
+<form class="login-form" th:action="@{/login}" method="post"> <!-- Replace "myprofile.html" with the URL or filename of your profile page -->
   <label for="email">Email:</label>
   <input type="email" id="email" name="email" required> <!-- Use type="email" for email input field -->
   <br>
@@ -62,6 +64,9 @@
   <input type="password" id="password" name="password" required>
   <br>
   <input type="submit" value="Log in">
+  <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+    <span>Email or password incorrect please try again</span>
+  </div>
 </form>
 </body>
 </html>

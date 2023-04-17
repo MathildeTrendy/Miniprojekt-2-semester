@@ -83,7 +83,7 @@ public class WishController {
 
 
 
-    @PostMapping(value = "/myprofile")
+    @PostMapping(value = "/myprofile{listName}")
     public String createWishlist(@RequestParam("email") String email, HttpSession userSession, Model model, @RequestParam("listName") WishlistFormDTO listName) {
         userSession.setAttribute("email", email);
         userSession.getAttribute("email");

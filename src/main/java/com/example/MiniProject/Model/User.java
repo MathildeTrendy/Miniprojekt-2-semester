@@ -19,6 +19,7 @@ package com.example.MiniProject.Model;
 
         }
 
+
         //Getter and setter
     public String getFirstName() {
         return firstName;

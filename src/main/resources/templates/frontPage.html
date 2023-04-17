@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8" >
     <title>Wishlist Freaks - Front Page</title>
     <style>
         body {
@@ -16,7 +17,7 @@
             width: 100%; /* Specify the desired width of the cropped image container */
             height: calc(100vh - 100px); /* Use viewport height minus 100px for the container (to accommodate buttons) */
             overflow: hidden; /* Hide the overflowing content */
-            margin-top: 50px; /* Adjust margin from the top for spacing */
+            margin-top: 10px; /* Adjust margin from the top for spacing */
         }
 
         .image {
@@ -40,17 +41,19 @@
             font-weight: bold; /* Bold font weight */
         }
 
-        .buttons a {
+        .buttons button {
             display: inline-block;
             padding: 12px 20px;
             background-color: #007bff;
             color: #fff;
             text-decoration: none;
             margin: 0 10px;
-            border-radius: 5px;
+            border-radius: 20px;
+            width: 200px;
+            margin: 5px;
         }
 
-        .buttons a:hover {
+        .buttons button:hover {
             background-color: #0056b3;
         }
     </style>
@@ -61,8 +64,12 @@
 </div>
 <div class="buttons">
     <h1>WishList Freaks</h1>
-    <a href="LogIn.html">Log in</a>
-    <a href="SignUp.html">Sign up</a>
+    <form th:action="@{/login}" method="get">
+        <button type="submit" class="button">Login</button>
+    </form>
+    <form th:action="@{/signup}" method="get">
+        <button type="submit" class="button">Sign up</button>
+    </form>
 </div>
 </body>
 </html>

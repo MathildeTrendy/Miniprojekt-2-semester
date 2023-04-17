@@ -23,7 +23,6 @@ public class WishRepository {
     @Value("$spring.datasource.password")
     private String databaseUserPassword;
 
-
     public User createUser(UserFormDTO userDTO) throws LoginSampleException {
         //Creates a database connection in Java by specifying the URL, username, and password.
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde")) {
@@ -56,8 +55,7 @@ public class WishRepository {
         }
     }
 
-    // Method to verify a user by their email adress
-    public User verifyUser(String email, String password) throws LoginSampleException {
+    public User verifyUser(String email, String password) {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde");
 
@@ -73,11 +71,12 @@ public class WishRepository {
                 User user = new User();
                 user.setEmail(resultSet.getString("email"));
                 user.setPassword(resultSet.getString("password"));
-                user.setFirstName(resultSet.getString("firstname"));
-                user.setLastName(resultSet.getString("lastname"));
+                user.setFirstName(resultSet.getString("firstName"));
+                user.setLastName(resultSet.getString("lastName"));
                 return user;
             } else {
-                throw new LoginSampleException("Could not validate user");
+                // User not found, return null
+                return null;
             }
         } catch (SQLException e) {
             // Handle the exception
