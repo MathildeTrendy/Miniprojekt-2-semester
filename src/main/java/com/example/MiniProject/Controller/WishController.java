@@ -84,10 +84,13 @@ public class WishController {
     }
 
     @GetMapping("/myprofile")
-    public String welcomeProfile(Model model) {
-        model.addAttribute("welcome", "Welcome");
+    public String welcomeProfile(Model model, HttpSession session, @RequestParam(value = "wishlistName", required = false) String wishlistName) {
+        if (wishlistName != null) {
+            model.addAttribute("wishlistName", wishlistName);
+        }
         return "myprofile";
     }
+
 
     @PostMapping("/myprofile/createlist")
     public String createWishlist(@RequestParam("wishlistName") String wishlistName, HttpSession session, RedirectAttributes redirectAttributes) {
@@ -98,7 +101,7 @@ public class WishController {
                 String userEmail = user.getEmail();
                 int id = wishRepository.createWishList(wishlistName, user.getEmail());
                 redirectAttributes.addFlashAttribute("successMessage", "Wishlist created successfully!");
-                return "createlist";
+                return "myprofile";
             } else {
             }
         } catch (SQLException e) {
