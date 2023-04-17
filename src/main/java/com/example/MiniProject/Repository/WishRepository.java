@@ -56,7 +56,6 @@ public class WishRepository {
         }
     }
 
-    // Method to verify a user by their email adress
 
     public User verifyUser(String email, String password) {
         try {
