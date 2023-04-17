@@ -88,11 +88,11 @@ public class WishRepository {
     public int createWishList(WishlistFormDTO wishlistFormDTO) {
         try (Connection connection = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)) {
 
-                //SQL query used to insert specified data into the database.
+            //SQL query used to insert specified data into the database.
             String SQL = "INSERT INTO wishLists " +
                     "(listName)" +
-                    "VALUES (\""+
-                    wishlistFormDTO.getListName()+ "\")";
+                    "VALUES (\"" +
+                    wishlistFormDTO.getListName() + "\")";
 
             PreparedStatement preparedStatement = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.execute();
@@ -106,10 +106,10 @@ public class WishRepository {
             }
             return generatedKey;
 
-            } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
-            }
         }
+    }
 
 
     // Metode til at opdatere en ønskeliste i databasen
@@ -144,14 +144,14 @@ public class WishRepository {
         try (Connection connection = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)) {
 
             //SQL query used to insert specified data into the database.
-            String SQL = "UPDATE wish_list set" + " Name = \""+ wishLists.getWishlistName() + "\" WHERE wishlist_id = \""+ id +"\"";
+            String SQL = "UPDATE wish_list set" + " Name = \"" + wishLists.getWishlistName() + "\" WHERE wishlist_id = \"" + id + "\"";
 
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.execute();
 
             return preparedStatement.getUpdateCount();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
@@ -160,7 +160,8 @@ public class WishRepository {
     public int deleteWishlist(int id, WishLists wishLists) {
         try (Connection connection = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)) {
 
-            String SQL = "DELETE FROM wish_list" + "Name = \""+ wishLists.getWishlistName() + "\" WHERE wishlist_id = \""+ id +"\"";;
+            String SQL = "DELETE FROM wish_list" + "Name = \"" + wishLists.getWishlistName() + "\" WHERE wishlist_id = \"" + id + "\"";
+            ;
 
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.execute();
@@ -172,12 +173,12 @@ public class WishRepository {
         }
     }
 
-    public int createWish (ItemFormDTO itemFormDTO) throws SQLException {
-        try(Connection connection = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)){
+    public int createWish(ItemFormDTO itemFormDTO) throws SQLException {
+        try (Connection connection = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)) {
 
             String SQL = "INSERT INTO items " + "(name_of_item, description_of_item, price, quantity, url)" +
-                    "VALUES (\""+ itemFormDTO.getItemName()+"\",\""+ itemFormDTO.getItemDescription()+"\",\""+
-                    itemFormDTO.getItemPrice()+"\",\""+ itemFormDTO.getItemQuantity()+"\",\""+ itemFormDTO.getItemUrl()+"\",\""+"\")";
+                    "VALUES (\"" + itemFormDTO.getItemName() + "\",\"" + itemFormDTO.getItemDescription() + "\",\"" +
+                    itemFormDTO.getItemPrice() + "\",\"" + itemFormDTO.getItemQuantity() + "\",\"" + itemFormDTO.getItemUrl() + "\",\"" + "\")";
 
             PreparedStatement preparedStatement = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.execute();
@@ -195,8 +196,6 @@ public class WishRepository {
             throw new RuntimeException(e);
         }
     }
-
-
 
 
 }

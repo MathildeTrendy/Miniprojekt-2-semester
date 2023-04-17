@@ -5,7 +5,6 @@ import com.example.MiniProject.DTO.WishlistFormDTO;
 import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Model.WishLists;
 import com.example.MiniProject.Repository.WishRepository;
-
 import com.example.MiniProject.Utility.LoginSampleException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
