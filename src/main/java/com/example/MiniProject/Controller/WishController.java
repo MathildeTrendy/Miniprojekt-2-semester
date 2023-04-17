@@ -1,10 +1,13 @@
 package com.example.MiniProject.Controller;
 
+
 import com.example.MiniProject.DTO.UserFormDTO;
 import com.example.MiniProject.DTO.WishlistFormDTO;
 import com.example.MiniProject.Model.User;
 import com.example.MiniProject.Model.WishLists;
+import com.example.MiniProject.Repository.DbRepository;
 import com.example.MiniProject.Repository.WishRepository;
+
 import com.example.MiniProject.Utility.LoginSampleException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -28,20 +31,26 @@ public class WishController {
     public String index() {
         return "frontPage";
     }
-    @PostMapping({"/",""})
-    public String index(HttpServletRequest request, @ModelAttribute UserFormDTO userformDTO, Model model) {
-        // Trying to login
-        try {
-            User user = wishRepository.verifyUser(userformDTO.getEmail(), userformDTO.getPassword());
+    @PostMapping("/login")
+    public String login(@RequestParam("email") String email,
+                        @RequestParam("password") String password,
+                        HttpSession userSession,
+                        Model model) {
+        User user = wishRepository.verifyUser(email, password);
 
-            request.getSession().setAttribute("email", user.getEmail());
+        if (user != null) {
+            userSession.setAttribute("email", email);
             return "redirect:/myprofile";
-
-            // if login fails, redirect to index with error message
-        } catch (LoginSampleException e) {
-            model.addAttribute("errorMessage", "An error occurred");
+        } else {
+            model.addAttribute("errorMessage", "Invalid email or password");
             return "frontPage";
         }
+
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
     }
 
     @GetMapping("/signup")
@@ -56,7 +65,7 @@ public class WishController {
         User user = wishRepository.createUser(userFormDTO);
         if (user != null) {
             request.getSession().setAttribute("email", user.getEmail());
-            return "redirect:/myprofile";
+            return "redirect:/signupsucces";
         } else {
             return "signupfail";
         }
@@ -68,8 +77,8 @@ public class WishController {
     }
 
 
-   /* @GetMapping("/wishlistOverview")
-    public String showAllWishlists(@RequestParam ("listName") String listName) {
+   /* @GetMapping("/createWishlist")
+    public String createWishlist(@RequestParam ("listName") String listName) {
         return "createWishlist";
     }
 **/
@@ -80,9 +89,7 @@ public class WishController {
         return "myprofile";
     }
 
-
-
-    @PostMapping(value = "/myprofile{listName}")
+    @PostMapping(value = "/myprofile")
     public String createWishlist(@RequestParam("email") String email, HttpSession userSession, Model model, @RequestParam("listName") WishlistFormDTO listName) {
         userSession.setAttribute("email", email);
         userSession.getAttribute("email");
@@ -91,7 +98,6 @@ public class WishController {
         }
         return "redirect:/myprofile";
     }
-
 
     @PostMapping("/editWishlist/{id}")
     public String editWishlist(@RequestParam("id") int id, @RequestBody WishLists wishLists) throws SQLException {

@@ -56,33 +56,24 @@ public class WishRepository {
     }
 
     public User verifyUser(String email, String password) {
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miniProjekt", "root", "SabrinaMathilde");
-
-            // Prepare a SQL statement to retrieve the user with the given email and password
-            String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, email);
-            statement.setString(2, password);
-
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                // User with the given email and password found, create a User object and return it
-                User user = new User();
-                user.setEmail(resultSet.getString("email"));
-                user.setPassword(resultSet.getString("password"));
-                user.setFirstName(resultSet.getString("firstName"));
-                user.setLastName(resultSet.getString("lastName"));
-                return user;
-            } else {
-                // User not found, return null
-                return null;
+        User user = null;
+        try (Connection conn = DriverManager.getConnection(databaseUserUrl, databaseUserUsername, databaseUserPassword)) {
+            String query = "SELECT * FROM users WHERE email=? AND password=?";
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setString(1, email);
+                stmt.setString(2, password);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        user = new User( rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getString("password"));
+                    }
+                }
             }
         } catch (SQLException e) {
-            // Handle the exception
-            throw new RuntimeException("Error verifying user", e);
+            e.printStackTrace();
         }
+        return user;
     }
+
 
     // Method to create a new wishlist in the database
     public int createWishList(WishlistFormDTO wishlistFormDTO) {
