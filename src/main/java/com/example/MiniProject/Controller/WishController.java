@@ -79,7 +79,6 @@ public class WishController {
         }
     }
 
-
     @GetMapping("signupsucces")
     public String signupSucces() {
         return "signupsucces";

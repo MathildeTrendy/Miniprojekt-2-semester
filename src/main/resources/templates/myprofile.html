@@ -72,79 +72,27 @@
         .profile-info p {
             margin-top: 10px;
         }
-
-        .logout {
-            margin-top: 20px;
-        }
-
-        .logout a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .logout a:hover {
-            text-decoration: underline;
-        }
-
         .buttons {
-            position: absolute;
-            left: 20px;
-            top: 250px;
+            text-align: center; /* Center the buttons within the container */
+            position: absolute; /* Position the buttons absolutely for centering */
+            top: 80%; /* Move the buttons down by 50% from the top */
+            left: 50%; /* Move the buttons horizontally by 50% from the left */
+            transform: translate(-50%, -50%); /* Center the buttons both horizontally and vertically */
         }
-
-        .button {
-            margin-left: 10px;
-            padding: 10px 20px;
+        .buttons button {
+            display: inline-block;
+            padding: 12px 20px;
             background-color: #007bff;
             color: #fff;
             text-decoration: none;
-            border: none;
-            cursor: pointer;
+            margin: 0 10px;
+            border-radius: 20px;
+            width: 200px;
+            margin: 5px;
         }
 
-        .button:hover {
+        .buttons button:hover {
             background-color: #0056b3;
-        }
-
-        .modal {
-            display: none; /* Hide the modal by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top of everything */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scrolling if needed */
-            background-color: rgba(0, 0, 0, 0.4); /* Black background with opacity */
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            max-width: 300px; /* Set a max width for the modal content */
-        }
-
-        close {
-            color: #888;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover {
-            color: #000;
-        }
-
-        /* Wishlist box styles */
-        .wishlist-box {
-            background-color: white;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            margin-top: 20px; /* Add margin top to push the wishlist box down */
         }
 
     </style>
@@ -163,13 +111,17 @@
 </form>
 
 
+
 <div class="lists">
     <p th:text="'Wishlist Name: ' + ${wishlistName}"></p>
 </div>
 
-<form class="logoutbtn" th:action="@{/logout}" method="get">
-    <button type="submit">Logout</button>
-</form>
+<div class="buttons">
+    <form th:action="@{/logout}" method="get">
+        <button type="submit" class="button">Log out</button>
+    </form>
+
+</div>
 
 </body>
 </html>
