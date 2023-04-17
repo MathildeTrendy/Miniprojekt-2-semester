@@ -1,9 +1,9 @@
 # Onboarding of New Users
 
 ## Welcome and introduction
-Welcome to Wishlist freaks - your ultimate web app to make your wishes come true! Wishlist freaks is designed to help you organize, share, and realize your wishes and dreams.
+Welcome to Wishlist freaks - your ultimate web app to make your wishes come true! Wishlist freaks are designed to help you organize, share, and realize your wishes and dreams.
 
-The purpose of Wishlist freaks is to provide you with a central place where you can create and manage your wishes in an easy and structured way. Wishlist freaks assists you in keeping track of your wishes and turning them into reality.
+The purpose of Wishlist freaks is to provide you with a central place, where you can create and manage your wishes in an easy and structured way. Wishlist freaks assists you in keeping track of your wishes and turning them into reality.
 
 The features of the application include:
 

@@ -28,25 +28,19 @@ public class WishController {
     public String index() {
         return "frontPage";
     }
+    @PostMapping({"/",""})
+    public String index(HttpServletRequest request, @ModelAttribute UserFormDTO userformDTO, Model model) {
+        // Trying to login
+        try {
+            User user = wishRepository.verifyUser(userformDTO.getEmail(), userformDTO.getPassword());
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
-    @PostMapping("/login")
-    public String login(@RequestParam("email") String email,
-                        @RequestParam("password") String password,
-                        HttpSession userSession,
-                        Model model) {
-        User user = wishRepository.verifyUser(email, password);
-
-        if (user != null) {
-            userSession.setAttribute("email", email);
+            request.getSession().setAttribute("email", user.getEmail());
             return "redirect:/myprofile";
-        } else {
-            model.addAttribute("errorMessage", "Invalid email or password");
-            return "login";
+
+            // if login fails, redirect to index with error message
+        } catch (LoginSampleException e) {
+            model.addAttribute("errorMessage", "An error occurred");
+            return "frontPage";
         }
     }
 
@@ -62,7 +56,7 @@ public class WishController {
         User user = wishRepository.createUser(userFormDTO);
         if (user != null) {
             request.getSession().setAttribute("email", user.getEmail());
-            return "redirect:/signupsucces";
+            return "redirect:/myprofile";
         } else {
             return "signupfail";
         }
@@ -73,11 +67,19 @@ public class WishController {
         return "signupsucces";
     }
 
+
+   /* @GetMapping("/wishlistOverview")
+    public String showAllWishlists(@RequestParam ("listName") String listName) {
+        return "createWishlist";
+    }
+**/
+
     @GetMapping("/myprofile")
     public String welcomeProfile(Model model) {
         model.addAttribute("welcome", "Welcome");
         return "myprofile";
     }
+
 
 
     @PostMapping(value = "/myprofile{listName}")
@@ -89,6 +91,7 @@ public class WishController {
         }
         return "redirect:/myprofile";
     }
+
 
     @PostMapping("/editWishlist/{id}")
     public String editWishlist(@RequestParam("id") int id, @RequestBody WishLists wishLists) throws SQLException {
